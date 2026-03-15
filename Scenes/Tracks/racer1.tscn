@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://d02oipvdp3d7u"]
+
+[ext_resource type="PackedScene" uid="uid://bcoifv488g118" path="res://Assets/Models/craft_racer.glb" id="1_3aupt"]
+
+[node name="craft_racer2" unique_id=400414786 instance=ExtResource("1_3aupt")]
+
+[node name="craft_racer" parent="." index="0" unique_id=1118600052]
+transform = Transform3D(-1, -8.742278e-08, 3.821371e-15, 0, -4.371139e-08, -1, 8.742278e-08, -1, 4.371139e-08, 0, 0, 0)

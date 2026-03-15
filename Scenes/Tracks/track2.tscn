@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://c4r6fanfghk8e"]
+
+[ext_resource type="PackedScene" uid="uid://ds4iuflvta20r" path="res://Scenes/Tracks/track_base.tscn" id="1_1ifst"]
+[ext_resource type="PackedScene" uid="uid://dpmr5xx71hi60" path="res://Scenes/Tracks/Meshes/Track2Mesh.tscn" id="2_8yjb0"]
+
+[sub_resource type="Environment" id="Environment_1ifst"]
+ambient_light_source = 3
+ambient_light_color = Color(0.4390491, 0.43904912, 0.43904912, 1)
+ambient_light_energy = 9.54
+
+[node name="Track2" unique_id=1889599176 instance=ExtResource("1_1ifst")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="0" unique_id=290805860]
+environment = SubResource("Environment_1ifst")
+
+[node name="DirectionalLight3D" parent="." index="1" unique_id=2133309083]
+transform = Transform3D(0.92787063, 0.34564352, 0.13995227, -0.29761928, 0.4602924, 0.83639336, 0.22467494, -0.8177173, 0.52996194, -7.049496, 3.567296, 6.0168757)
+
+[node name="Node3D" parent="." index="3" unique_id=1541374620 instance=ExtResource("2_8yjb0")]
+transform = Transform3D(0.733801, -0.67936444, 0, 0.67936444, 0.733801, 0, 0, 0, 1, 204.06369, 35.671436, -149.19003)

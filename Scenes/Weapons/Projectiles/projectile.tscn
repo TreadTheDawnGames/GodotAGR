@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://dcy7o5wfvwgdw"]
+
+[ext_resource type="Script" uid="uid://cg7oiwcfnh8ic" path="res://Scenes/projectile.gd" id="1_rnpl4"]
+[ext_resource type="Script" uid="uid://1461p1xmpfu6" path="res://Scripts/hitbox3d.gd" id="2_xifme"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xifme"]
+albedo_color = Color(1, 1, 0, 1)
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+emission_energy_multiplier = 16.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_xifme"]
+material = SubResource("StandardMaterial3D_xifme")
+radius = 0.1
+height = 0.2
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_vupct"]
+radius = 0.15
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_4af56"]
+radius = 0.1
+
+[node name="Projectile" type="CharacterBody3D" unique_id=1994070456 node_paths=PackedStringArray("hitbox")]
+collision_layer = 0
+collision_mask = 3
+script = ExtResource("1_rnpl4")
+hitbox = NodePath("Area3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=885905165]
+mesh = SubResource("SphereMesh_xifme")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1015322486]
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("2_xifme")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1976737345]
+shape = SubResource("SphereShape3D_vupct")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=764514066]
+shape = SubResource("SphereShape3D_4af56")

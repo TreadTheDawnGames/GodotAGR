@@ -1,0 +1,100 @@
+[gd_scene format=3 uid="uid://chics8gd3g1u0"]
+
+[ext_resource type="ArrayMesh" uid="uid://d0goqcociuey3" path="res://Assets/Models/TrackPiece.obj" id="1_ddjo0"]
+[ext_resource type="Texture2D" uid="uid://caf4f2vlfpi01" path="res://Assets/Sprites/Road.png" id="2_lfurd"]
+[ext_resource type="ArrayMesh" uid="uid://clv5b1tmkskjk" path="res://Assets/Models/TrackWallPiece.obj" id="2_s7efg"]
+
+[sub_resource type="Curve3D" id="Curve3D_ddjo0"]
+closed = true
+_data = {
+"points": PackedVector3Array(-293.7341, 93.34152, 13.851624, 293.7341, -93.34152, -13.851624, -77.91254, -30.543427, 54.492584, 254.48035, 23.543533, -177.86987, -254.48035, -23.543533, 177.86987, 87.89032, 201.76, -34.216736, -62.34491, -111.41643, 19.969818, 62.34491, 111.41643, -19.969818, 439.24005, 34.5282, 202.41296, 94.32324, -63.740875, 131.3628, -94.32324, 63.740875, -131.3628, 435.95825, 458.7802, 105.01947, 220.54022, 49.71057, 15.390381, -220.54022, -49.71057, -15.390381, -340.72983, 377.1917, -183.47217, -36.64676, 98.77588, -56.10678, 36.64676, -98.77588, 56.10678, -403.04352, 327.8014, 9.56189, -155.78253, 150.08182, -206.36108, 155.78253, -150.08182, 206.36108, -442.59448, -346.3006, -125.77435, 42.295013, -145.69443, 76.78981, -42.295013, 145.69443, -76.78981, 82.31476, 36.219543, -201.37682, -158.31232, -156.05898, -148.6641, 158.31232, 156.05898, 148.6641, 254.14874, 216.38289, -236.57755, -40.27475, 116.22317, -68.667694, 40.27475, -116.22317, 68.667694, -68.80026, 187.35455, 116.88809, 108.51538, 27.712662, 117.58209, -108.51538, -27.712662, -117.58209, -483.9026, -240.86578, 292.01266, 4.367676, -259.74313, 56.33972, -4.367676, 259.74313, -56.33972, -695.38763, -70.48877, -669.36346, -151.22873, 18.152863, -36.68933, 151.22873, -18.152863, 36.68933, -304.78702, 342.43106, -365.06616, -68.6595, 169.10165, -111.319214, 68.6595, -169.10165, 111.319214, -237.79268, 90.53991, 411.38324, -228.97368, -33.110107, -39.915894, 228.97368, 33.110107, 39.915894, -150.17374, -582.1252, 212.46533, -64.023895, -133.51633, 55.10907, 64.023895, 133.51633, -55.10907, -134.03522, -98.31525, -580.3881, 140.97266, 27.965897, 11.7439575, -140.97266, -27.965897, -11.7439575, -198.24225, 168.58632, -365.26874, 92.48596, 87.63492, -26.959534, -92.48596, -87.63492, 26.959534, -761.9966, 3.1915283, -189.24188, -29.95105, -138.59749, -74.963905, 29.95105, 138.59749, 74.963905, -779.588, 27.671036, 103.28414),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 19
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ddjo0"]
+albedo_texture = ExtResource("2_lfurd")
+
+[sub_resource type="Curve" id="Curve_s7efg"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.2576419, 1), 0.0, 0.0, 0, 0, Vector2(0.55458516, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o2xjv"]
+albedo_color = Color(0.26657522, 0.2665752, 0.2665752, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vwsxd"]
+albedo_color = Color(0.26657522, 0.2665752, 0.2665752, 1)
+
+[node name="Track3" type="Node3D" unique_id=716470887]
+
+[node name="Path3D" type="Path3D" parent="." unique_id=1301359839]
+curve = SubResource("Curve3D_ddjo0")
+
+[node name="Track" type="PathMesh3D" parent="." unique_id=1171433023 node_paths=PackedStringArray("path_3d")]
+path_3d = NodePath("../Path3D")
+collision_mode = 1
+collision_layer = 1
+collision_mask = 1
+mesh = ExtResource("1_ddjo0")
+surface_0/tile_rotation = Vector3(0, 0, 0)
+surface_0/tile_rotation_order = 2
+surface_0/distribution = 0
+surface_0/alignment = 0
+surface_0/warp_along_curve = true
+surface_0/mesh_length_offset = 0.0
+surface_0/sample_cubic = false
+surface_0/tilt = true
+surface_0/offset = Vector2(0, 0)
+surface_0/triangle_count = 42756
+material_override = SubResource("StandardMaterial3D_ddjo0")
+
+[node name="PathModifier3D" type="PathModifier3D" parent="Track" unique_id=883451093]
+curve_offset_end = 12728.79
+influence = SubResource("Curve_s7efg")
+scale_modifier = Vector3(3, 3, 3)
+
+[node name="PathMesh3D" type="PathMesh3D" parent="." unique_id=919492515 node_paths=PackedStringArray("path_3d")]
+path_3d = NodePath("../Path3D")
+collision_mode = 1
+collision_layer = 1
+collision_mask = 1
+mesh = ExtResource("2_s7efg")
+surface_0/tile_rotation = Vector3(0, 0, 0)
+surface_0/tile_rotation_order = 2
+surface_0/distribution = 0
+surface_0/alignment = 0
+surface_0/warp_along_curve = true
+surface_0/mesh_length_offset = 0.0
+surface_0/sample_cubic = false
+surface_0/tilt = true
+surface_0/offset = Vector2(12.53, 1.5)
+surface_0/triangle_count = 6096
+material_override = SubResource("StandardMaterial3D_o2xjv")
+
+[node name="PathModifier3D" type="PathModifier3D" parent="PathMesh3D" unique_id=1347214742]
+curve_offset_end = 12728.79
+influence = SubResource("Curve_s7efg")
+position_modifier = Vector3(24.5, 0, 0)
+
+[node name="PathMesh3D2" type="PathMesh3D" parent="." unique_id=574244165 node_paths=PackedStringArray("path_3d")]
+path_3d = NodePath("../Path3D")
+collision_mode = 1
+collision_layer = 1
+collision_mask = 1
+mesh = ExtResource("2_s7efg")
+surface_0/tile_rotation = Vector3(0, 3.1415927, 0)
+surface_0/tile_rotation_order = 2
+surface_0/distribution = 0
+surface_0/alignment = 0
+surface_0/warp_along_curve = true
+surface_0/mesh_length_offset = 0.0
+surface_0/sample_cubic = false
+surface_0/tilt = true
+surface_0/offset = Vector2(-12.5, 1.5)
+surface_0/triangle_count = 6096
+material_override = SubResource("StandardMaterial3D_vwsxd")
+
+[node name="PathModifier3D2" type="PathModifier3D" parent="PathMesh3D2" unique_id=1939885367]
+curve_offset_end = 12728.79
+influence = SubResource("Curve_s7efg")
+position_modifier = Vector3(-24.5, 0, 0)

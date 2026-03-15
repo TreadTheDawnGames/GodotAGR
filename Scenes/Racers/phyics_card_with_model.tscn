@@ -1,0 +1,131 @@
+[gd_scene format=3 uid="uid://1s75imw0gryk"]
+
+[ext_resource type="Script" uid="uid://bny7nn3jaal31" path="res://Scripts/phyics_card_with_model.gd" id="1_or2hj"]
+[ext_resource type="Script" uid="uid://ckvro8h27plew" path="res://Scripts/visual_part_of_car.gd" id="2_50kln"]
+[ext_resource type="PackedScene" uid="uid://d02oipvdp3d7u" path="res://Scenes/Tracks/racer1.tscn" id="3_mhdb0"]
+[ext_resource type="Script" uid="uid://ctyb0ta0atok8" path="res://Scripts/camera_dampner.gd" id="5_3jyv5"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7fwxv"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_pah12"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_nwt4v"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_suaxw"]
+
+[node name="PhysicsCar" type="CharacterBody3D" unique_id=1233134335]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_or2hj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1674258501]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_7fwxv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D" unique_id=1765821326]
+transform = Transform3D(1, 0, 0, 0, 1, -1.98683e-08, 0, 1.98683e-08, 1, 0, 0, 0)
+visible = false
+mesh = SubResource("CapsuleMesh_pah12")
+skeleton = NodePath("../..")
+
+[node name="RayCast3D9" type="RayCast3D" parent="." unique_id=472238629]
+transform = Transform3D(0.6, 0, 0, 0, 1.25, 0, 0, 0, 0.6, 0, 0, 0)
+
+[node name="RayCast3D9" type="RayCast3D" parent="RayCast3D9" unique_id=129497218]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0, 0)
+
+[node name="RayCast3D10" type="RayCast3D" parent="RayCast3D9" unique_id=1950649082]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, 0, 0)
+
+[node name="RayCast3D10" type="RayCast3D" parent="." unique_id=1782694547]
+transform = Transform3D(0.6, 0, 0, 0, 1.25, 0, 0, 0, 0.6, 0, 0, 0.875)
+
+[node name="RayCast3D9" type="RayCast3D" parent="RayCast3D10" unique_id=103020742]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0, -0.5)
+
+[node name="RayCast3D10" type="RayCast3D" parent="RayCast3D10" unique_id=1037482823]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, 0, -0.5)
+
+[node name="RayCast3D11" type="RayCast3D" parent="." unique_id=267921150]
+transform = Transform3D(0.6, 0, 0, 0, 1.25, 0, 0, 0, 0.6, 0, 0, -0.875)
+
+[node name="RayCast3D9" type="RayCast3D" parent="RayCast3D11" unique_id=1488042771]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0, 0.5)
+
+[node name="RayCast3D10" type="RayCast3D" parent="RayCast3D11" unique_id=1854103219]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, 0, 0.5)
+
+[node name="RayCast3D12" type="RayCast3D" parent="." unique_id=479538041]
+transform = Transform3D(0.6, 0, 0, 0, 1.25, 0, 0, 0, 0.6, 0, 0, -0.25)
+
+[node name="RayCast3D13" type="RayCast3D" parent="." unique_id=777440844]
+transform = Transform3D(0.6, 0, 0, 0, 1.25, 0, 0, 0, 0.6, 0, 0, 0.25)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=1839285757]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_nwt4v")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D2" unique_id=778627955]
+transform = Transform3D(1, 0, 0, 0, 1, -1.98683e-08, 0, 1.98683e-08, 1, 0, 0, 0)
+visible = false
+mesh = SubResource("CapsuleMesh_suaxw")
+skeleton = NodePath("../..")
+
+[node name="RayCast3D14" type="RayCast3D" parent="." unique_id=1213592010]
+transform = Transform3D(0.6, 0, 0, 0, 1.25, 0, 0, 0, 0.6, 0, 0, 0)
+
+[node name="RayCast3D9" type="RayCast3D" parent="RayCast3D14" unique_id=140150676]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0, 0)
+
+[node name="RayCast3D10" type="RayCast3D" parent="RayCast3D14" unique_id=651274205]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, 0, 0)
+
+[node name="RayCast3D15" type="RayCast3D" parent="." unique_id=574361333]
+transform = Transform3D(0.6, 0, 0, 0, 1.25, 0, 0, 0, 0.6, 0, 0, 0.875)
+
+[node name="RayCast3D9" type="RayCast3D" parent="RayCast3D15" unique_id=1746111405]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0, -0.5)
+
+[node name="RayCast3D10" type="RayCast3D" parent="RayCast3D15" unique_id=814313992]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, 0, -0.5)
+
+[node name="RayCast3D16" type="RayCast3D" parent="." unique_id=137546000]
+transform = Transform3D(0.6, 0, 0, 0, 1.25, 0, 0, 0, 0.6, 0, 0, -0.875)
+
+[node name="RayCast3D9" type="RayCast3D" parent="RayCast3D16" unique_id=606340732]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 0, 0.5)
+
+[node name="RayCast3D10" type="RayCast3D" parent="RayCast3D16" unique_id=4821332]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, 0, 0.5)
+
+[node name="RayCast3D17" type="RayCast3D" parent="." unique_id=331012175]
+transform = Transform3D(0.6, 0, 0, 0, 1.25, 0, 0, 0, 0.6, 0, 0, -0.25)
+
+[node name="RayCast3D18" type="RayCast3D" parent="." unique_id=936877817]
+transform = Transform3D(0.6, 0, 0, 0, 1.25, 0, 0, 0, 0.6, 0, 0, 0.25)
+
+[node name="VisualPartOfCar" type="MeshInstance3D" parent="." unique_id=1105076816 node_paths=PackedStringArray("ship_model", "mycar")]
+rotation_order = 1
+top_level = true
+skeleton = NodePath("../..")
+script = ExtResource("2_50kln")
+ship_model = NodePath("craft_racer2")
+mycar = NodePath("..")
+strafe_visual_speed = 25.0
+
+[node name="craft_racer2" parent="VisualPartOfCar" unique_id=400414786 instance=ExtResource("3_mhdb0")]
+
+[node name="SpringArm3D" type="SpringArm3D" parent="VisualPartOfCar" unique_id=855792824]
+transform = Transform3D(-1, 7.986469e-08, 3.555805e-08, 0, 0.40673667, -0.9135456, -8.742278e-08, -0.9135456, -0.40673667, 0, 0, 0)
+spring_length = 13.745
+
+[node name="Marker3D" type="Marker3D" parent="VisualPartOfCar/SpringArm3D" unique_id=421143750]
+transform = Transform3D(1, 0, 0, 0, 0.9659258, -0.25881904, 0, 0.25881904, 0.9659258, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="VisualPartOfCar" unique_id=411333095]
+transform = Transform3D(-1, 7.986471e-08, 3.5558045e-08, 8.74228e-08, 0.9135455, 0.40673664, 1.3152316e-14, 0.40673664, -0.9135455, 1.7053026e-13, 5.49611, -12.3413105)
+top_level = true
+script = ExtResource("5_3jyv5")
+lerp_speed = Vector3(0.8, 0.5, 0.8)
+ang_lerp_speed = Vector3(1, 1, 1)
+target_node_path = NodePath("../SpringArm3D/Marker3D")

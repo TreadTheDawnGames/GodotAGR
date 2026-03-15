@@ -1,0 +1,128 @@
+[gd_scene format=3 uid="uid://fw7eu7xwc1qq"]
+
+[ext_resource type="Script" uid="uid://dfd6pqrkjtakb" path="res://Scripts/debug_tools.gd" id="1_3dogw"]
+[ext_resource type="Script" uid="uid://cjc2ikrefvvdq" path="res://addons/zylann.hterrain/hterrain.gd" id="2_50ct6"]
+[ext_resource type="Resource" uid="uid://j5romqovq38o" path="res://Assets/Terrain/data.hterrain" id="3_ak5v8"]
+[ext_resource type="Script" uid="uid://cln80f4dwv35i" path="res://addons/zylann.hterrain/hterrain_texture_set.gd" id="3_hb2xm"]
+[ext_resource type="PackedScene" uid="uid://uhlj08qhmfqr" path="res://Scenes/Racers/phyics_car_with_weapons.tscn" id="5_ak5v8"]
+
+[sub_resource type="Resource" id="Resource_ak5v8"]
+script = ExtResource("3_hb2xm")
+mode = 0
+textures = [[], []]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x033f"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_rdbpf"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oho3u"]
+size = Vector3(30, 30, 0.25)
+
+[sub_resource type="BoxMesh" id="BoxMesh_d3awe"]
+size = Vector3(30, 30, 0.25)
+
+[sub_resource type="Animation" id="Animation_ak5v8"]
+resource_name = "RESET"
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_x033f"]
+resource_name = "elevator"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(251.52011, 20.897226, 299.13315), Vector3(251.52011, 36.27928, 299.13315)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rdbpf"]
+_data = {
+&"RESET": SubResource("Animation_ak5v8"),
+&"elevator": SubResource("Animation_x033f")
+}
+
+[node name="Node3D" type="Node3D" unique_id=1771197406]
+script = ExtResource("1_3dogw")
+
+[node name="HTerrain" type="Node3D" parent="." unique_id=1408702683]
+script = ExtResource("2_50ct6")
+_terrain_data = ExtResource("3_ak5v8")
+chunk_size = 32
+collision_enabled = true
+collision_layer = 1
+collision_mask = 1
+shader_type = "Classic4Lite"
+custom_shader = null
+custom_globalmap_shader = null
+texture_set = SubResource("Resource_ak5v8")
+render_layers = 1
+cast_shadow = 1
+shader_params/u_ground_uv_scale = 20
+shader_params/u_depth_blending = true
+shader_params/u_triplanar = null
+shader_params/u_tile_reduction = null
+metadata/_custom_type_script = "uid://cjc2ikrefvvdq"
+
+[node name="HTerrain2" type="Node3D" parent="." unique_id=996105855]
+transform = Transform3D(1, 0, -8.742278e-08, 0, -1, 0, 8.742278e-08, 0, 1, 0, 200, 0)
+script = ExtResource("2_50ct6")
+_terrain_data = ExtResource("3_ak5v8")
+chunk_size = 32
+collision_enabled = true
+collision_layer = 1
+collision_mask = 1
+shader_type = "Classic4Lite"
+custom_shader = null
+custom_globalmap_shader = null
+texture_set = SubResource("Resource_ak5v8")
+render_layers = 1
+cast_shadow = 1
+shader_params/u_ground_uv_scale = 20
+shader_params/u_depth_blending = true
+shader_params/u_triplanar = null
+shader_params/u_tile_reduction = null
+metadata/_custom_type_script = "uid://cjc2ikrefvvdq"
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=451234652]
+transform = Transform3D(1, 0, 0, 0, 0.8290376, 0.5591929, 0, -0.5591929, 0.8290376, 260, 91.1832, 224)
+shadow_enabled = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=718720596]
+transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 224, 33, 213)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1480091700]
+shape = SubResource("BoxShape3D_x033f")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D" unique_id=1758968359]
+mesh = SubResource("BoxMesh_rdbpf")
+
+[node name="StaticBody3D3" type="AnimatableBody3D" parent="." unique_id=288808365]
+transform = Transform3D(0.9981666, 0.060525917, -2.6456715e-09, 2.2178908e-16, -4.3711392e-08, -1, -0.060525905, 0.99816674, -4.3631246e-08, 251.52011, 20.897226, 299.13315)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D3" unique_id=1570322483]
+shape = SubResource("BoxShape3D_oho3u")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D3/CollisionShape3D" unique_id=868341017]
+mesh = SubResource("BoxMesh_d3awe")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="StaticBody3D3" unique_id=590950720]
+libraries/ = SubResource("AnimationLibrary_rdbpf")
+autoplay = &"elevator"
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="." unique_id=1883889880]
+transform = Transform3D(-0.0560522, 0.8073336, 0.5874272, -0.015386425, 0.58758384, -0.809017, -0.9983093, -0.054385588, -0.02051339, 224, 12, 301)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2" unique_id=2049761066]
+shape = SubResource("BoxShape3D_oho3u")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D2/CollisionShape3D" unique_id=835489582]
+mesh = SubResource("BoxMesh_d3awe")
+
+[node name="PhysicsCarWithWeapons" parent="." unique_id=1233134335 instance=ExtResource("5_ak5v8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 261, 29, 216)

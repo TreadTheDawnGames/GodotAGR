@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://bjmu0pqfhbiyy"]
+
+[ext_resource type="PackedScene" uid="uid://ds4iuflvta20r" path="res://Scenes/Tracks/track_base.tscn" id="1_75lro"]
+[ext_resource type="PackedScene" uid="uid://chics8gd3g1u0" path="res://Scenes/Tracks/Meshes/track_3_mesh.tscn" id="2_5ujwb"]
+
+[node name="TrackBase" unique_id=1889599176 instance=ExtResource("1_75lro")]
+
+[node name="PhysicsCarWithWeapons" parent="." index="0" unique_id=1233134335]
+speed = 2.0
+
+[node name="Track3" parent="." index="1" unique_id=716470887 instance=ExtResource("2_5ujwb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 34.81054, -44.080696)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." index="2" unique_id=1604177214]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)

@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://cmwcd7bds5t4q"]
+
+[ext_resource type="PackedScene" uid="uid://cpl7ns70xmc8b" path="res://Scenes/Weapons/weapon.tscn" id="1_xehur"]
+[ext_resource type="PackedScene" uid="uid://pa42p84n6jet" path="res://Assets/Models/KenneyBlasters/scope-large-a.glb" id="2_bsuw3"]
+
+[node name="Weapon_DoubleShot" unique_id=2010869066 node_paths=PackedStringArray("spawn_positions") instance=ExtResource("1_xehur")]
+spawn_positions = [NodePath("SpawnPosition"), NodePath("scope-large-a3/SpawnPosition2")]
+
+[node name="scope-large-a2" parent="." index="0" unique_id=491753664]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -0.1508055, -0.07232252, 0.241)
+
+[node name="scope-large-a3" parent="." index="1" unique_id=1801851429 instance=ExtResource("2_bsuw3")]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0.17150179, -0.06577678, 0.24098358)
+
+[node name="SpawnPosition2" type="Marker3D" parent="scope-large-a3" index="1" unique_id=1772294842]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0.0010082349, -0.39216852, -0.46198356)
+
+[node name="SpawnPosition" parent="." index="3" unique_id=1920454608]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.24072784, -0.070650324, -0.22068158)

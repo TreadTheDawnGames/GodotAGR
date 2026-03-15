@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://dpmr5xx71hi60"]
+
+[ext_resource type="ArrayMesh" uid="uid://d0goqcociuey3" path="res://Assets/Models/TrackPiece.obj" id="1_1nx1a"]
+[ext_resource type="ArrayMesh" uid="uid://clv5b1tmkskjk" path="res://Assets/Models/TrackWallPiece.obj" id="2_b57ox"]
+
+[sub_resource type="Curve3D" id="Curve3D_y43iv"]
+closed = true
+bake_interval = 0.01
+_data = {
+"points": PackedVector3Array(169.00418, 110.75389, -254.34686, -169.00418, -110.75389, 254.34686, -231.65173, 75.27779, 150.10669, -96.76053, 90.93211, 66.89172, 96.76053, -90.93211, -66.89172, 200.95816, -226.33885, 20.035034, -133.43738, 123.03897, 93.450714, 133.43738, -123.03897, -93.450714, 618.7168, -510.963, -168.91156, -42.703857, 107.98804, 66.85199, 42.703857, -107.98804, -66.85199, 844.46387, -861.49744, 79.829285, -38.211426, -16.834167, 95.1765, 38.211426, 16.834167, -95.1765, 979.6917, -892.4432, -278.95306, -66.385315, -23.654907, 167.32947, 66.385315, 23.654907, -167.32947, 722.7754, -559.25256, -407.06006, -11.004761, 594.85144, 239.7522, 11.004761, -594.85144, -239.7522, 1055.0582, -824.635, -729.91174, -571.2511, 360.32263, -71.744934, 571.2511, -360.32263, 71.744934, 1741.0494, -1387.0706, -1048.5027, 837.4402, -799.0543, 65.638794, -837.4402, 799.0543, -65.638794, 1863.0354, -2040.1727, -439.2013, 311.20618, -146.84155, 39.877014, -311.20618, 146.84155, -39.877014, 1383.3829, -2236.3918, 555.7526, 37.285034, -420.005, 173.30206, -37.285034, 420.005, -173.30206, 851.396, -1468.791, 440.1416, 118.47034, -299.63245, -36.489258, -118.47034, 299.63245, 36.489258, 1106.3494, -291.266, -169.7622, 146.74738, 101.22351, -109.66235, -146.74738, -101.22351, 109.66235, 786.3869, -238.75757, 67.73926, 208.34996, 157.98506, -48.71411, -208.34996, -157.98506, 48.71411, 273.63098, 95.879974, -115.24701, 678.5576, -546.7356, -182.59454, -678.5576, 546.7356, 182.59454, -330.78967, -159.07285, -596.40326, -47.088257, 387.7688, -150.61353, 47.088257, -387.7688, 150.61353, -1249.3431, 93.649475, -116.16577, -533.5471, 859.2174, -56.814575, 533.5471, -859.2174, 56.814575, -1917.293, -1271.0739, 951.7656, -518.66693, -149.20313, 526.9092, 518.66693, 149.20313, -526.9092, -200.59723, -2153.3289, 256.00073),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 18
+
+[node name="Node3D" type="Node3D" unique_id=1541374620]
+transform = Transform3D(0.733801, -0.67936444, 0, 0.67936444, 0.733801, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Path3D" type="Path3D" parent="." unique_id=1506236950]
+curve = SubResource("Curve3D_y43iv")
+
+[node name="Track" type="PathMesh3D" parent="." unique_id=491426913 node_paths=PackedStringArray("path_3d")]
+path_3d = NodePath("../Path3D")
+collision_mode = 1
+collision_layer = 1
+collision_mask = 1
+mesh = ExtResource("1_1nx1a")
+surface_0/tile_rotation = Vector3(0, 0, 0)
+surface_0/tile_rotation_order = 2
+surface_0/distribution = 0
+surface_0/alignment = 0
+surface_0/warp_along_curve = true
+surface_0/mesh_length_offset = 0.0
+surface_0/sample_cubic = false
+surface_0/tilt = true
+surface_0/offset = Vector2(0, 0)
+surface_0/triangle_count = 17220
+
+[node name="PathMesh3D" type="PathMesh3D" parent="." unique_id=14137659 node_paths=PackedStringArray("path_3d")]
+path_3d = NodePath("../Path3D")
+collision_mode = 1
+collision_layer = 1
+collision_mask = 1
+mesh = ExtResource("2_b57ox")
+surface_0/tile_rotation = Vector3(0, 0, 0)
+surface_0/tile_rotation_order = 2
+surface_0/distribution = 0
+surface_0/alignment = 0
+surface_0/warp_along_curve = true
+surface_0/mesh_length_offset = 0.0
+surface_0/sample_cubic = false
+surface_0/tilt = true
+surface_0/offset = Vector2(0, 0)
+surface_0/triangle_count = 57540
+
+[node name="PathMesh3D2" type="PathMesh3D" parent="." unique_id=65264126 node_paths=PackedStringArray("path_3d")]
+path_3d = NodePath("../Path3D")
+collision_mode = 1
+collision_layer = 2
+collision_mask = 2
+mesh = ExtResource("2_b57ox")
+surface_0/tile_rotation = Vector3(0, 0, 0)
+surface_0/tile_rotation_order = 2
+surface_0/distribution = 0
+surface_0/alignment = 0
+surface_0/warp_along_curve = true
+surface_0/mesh_length_offset = 0.0
+surface_0/sample_cubic = false
+surface_0/tilt = true
+surface_0/offset = Vector2(-100, 0)
+surface_0/triangle_count = 57540
