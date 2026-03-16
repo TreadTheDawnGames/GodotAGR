@@ -10,8 +10,20 @@ func _ready() -> void:
 # Called every frame from scene root
 func handle_weapons(delta : float, velocity : Vector3):
 	
+	var targets_with_distance_away : Dictionary[Targetable3D, float]
+	
+	for target : Targetable3D in get_tree().get_nodes_in_group(&"Targetables"):
+		var space_state = get_world_3d().direct_space_state
+		# use global coordinates, not local to node
+		var query = PhysicsRayQueryParameters3D.create(global_position, target.global_position)
+		var result = space_state.intersect_ray(query)
+		if result:
+			if (result["collider"] as Node).find_children("*", "Targetable3D", true, true).size() > 0:
+				targets_with_distance_away.get_or_add(target, (global_position - (result["position"] as Vector3)).length())
+		pass
+	
 	for weapon : CarWeapon in weapons:
-		weapon.tick_cooldown(delta, velocity)
+		weapon.tick_weapon(delta, velocity, targets_with_distance_away)
 	
 	if Input.is_action_pressed("FirePrimary"):
 		if weapons.size() > 0:

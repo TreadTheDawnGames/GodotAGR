@@ -3,8 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://1s75imw0gryk" path="res://Scenes/Racers/phyics_card_with_model.tscn" id="1_mirks"]
 [ext_resource type="Script" uid="uid://bryfyoxdlwk42" path="res://Scripts/phyics_car_with_weapons.gd" id="2_ynbrd"]
 [ext_resource type="Script" uid="uid://bb72cp6bivsih" path="res://Scenes/Racers/weapons_manager.gd" id="3_grbwd"]
-[ext_resource type="PackedScene" uid="uid://cpl7ns70xmc8b" path="res://Scenes/Weapons/weapon.tscn" id="4_grbwd"]
-[ext_resource type="PackedScene" uid="uid://cmwcd7bds5t4q" path="res://Scenes/Weapons/weapon_doubleshot.tscn" id="5_wwejg"]
+[ext_resource type="PackedScene" uid="uid://cpl7ns70xmc8b" path="res://Scenes/Modules/Weapons/weapon.tscn" id="4_grbwd"]
+[ext_resource type="PackedScene" uid="uid://cmwcd7bds5t4q" path="res://Scenes/Modules/Weapons/weapon_doubleshot.tscn" id="5_wwejg"]
 
 [node name="PhysicsCarWithWeapons" unique_id=1233134335 node_paths=PackedStringArray("weapons_manager") instance=ExtResource("1_mirks")]
 collision_layer = 0
@@ -14,11 +14,11 @@ weapons_manager = NodePath("VisualPartOfCar/craft_racer2/WeaponsManager")
 [node name="WeaponsManager" type="Node3D" parent="VisualPartOfCar/craft_racer2" parent_id_path=PackedInt32Array(400414786) index="1" unique_id=1873970340 node_paths=PackedStringArray("weapons")]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.900529, -0.18390921)
 script = ExtResource("3_grbwd")
-weapons = [NodePath("BaseWeapon"), NodePath("Weapon_DoubleShot")]
+weapons = [NodePath("Weapon_DoubleShot"), NodePath("BaseWeapon")]
 
-[node name="BaseWeapon" parent="VisualPartOfCar/craft_racer2/WeaponsManager" index="0" unique_id=2010869066 instance=ExtResource("4_grbwd")]
-
-[node name="Weapon_DoubleShot" parent="VisualPartOfCar/craft_racer2/WeaponsManager" index="1" unique_id=693924245 instance=ExtResource("5_wwejg")]
+[node name="Weapon_DoubleShot" parent="VisualPartOfCar/craft_racer2/WeaponsManager" index="0" unique_id=693924245 instance=ExtResource("5_wwejg")]
 cooldown = 0.1
 amount = 1
 spread = 0.0
+
+[node name="BaseWeapon" parent="VisualPartOfCar/craft_racer2/WeaponsManager" index="1" unique_id=2010869066 instance=ExtResource("4_grbwd")]

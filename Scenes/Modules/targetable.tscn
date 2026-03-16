@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://4cs5w08i025b"]
+
+[ext_resource type="Script" uid="uid://b0dna7lmhpgof" path="res://Scripts/targetable.gd" id="1_5shyh"]
+[ext_resource type="Texture2D" uid="uid://bqtn0ysoidc1i" path="res://Assets/Sprites/TargetLock.png" id="2_brmam"]
+
+[node name="Targetable" type="Node3D" unique_id=1799438792]
+script = ExtResource("1_5shyh")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=498176536]
+unique_name_in_owner = true
+billboard = 1
+no_depth_test = true
+texture = ExtResource("2_brmam")
