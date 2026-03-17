@@ -2,6 +2,11 @@
 extends CharacterBody3D
 class_name CarBuiltInPhysics
 
+
+@export var input_device_index : int = 0
+var input : DeviceInput
+
+@export_category("Car stats")
 @export var speed : float = 1.0
 @export var strafe_speed : float = 0.5
 
@@ -19,6 +24,7 @@ var roll_change : float = 0
 var rotate_change : float = 0
 var was_y_vel : float = 0
 
+@export_category("Physics")
 @export var gravity : float= 1.0/4.0
 var raycasts : Array[RayCast3D]= []
 
@@ -33,6 +39,7 @@ var raycasts : Array[RayCast3D]= []
 
 @export var adjustable_ground_distance : bool = false
 @export var max_elevation : float = 3
+
 
 var mesh : MeshInstance3D
 
@@ -76,6 +83,10 @@ func _ready():
 		raycasts.append(child)
 		child.target_position.y = -ground_dist
 
+func set_input_device(device_index : int):
+	input = DeviceInput.new(device_index)
+	pass
+
 func is_raycast_colliding() -> bool:
 	for  ray in raycasts:
 		if (ray.is_colliding()):
@@ -85,17 +96,18 @@ func is_raycast_colliding() -> bool:
 var target_elevation : float 
 
 func _physics_process(delta: float) -> void:
+	input.is_known()
 	# Create temp velocity vector
 	var vel : Vector3 = velocity
 	# Get inputs
-	var my_rotation : float = Input.get_action_strength("Left") - Input.get_action_strength("Right")
-	var pitch : float = Input.get_action_strength("PitchUp") - Input.get_action_strength("PitchDown")
-	var roll : float = Input.get_action_strength("RollLeft") - Input.get_action_strength("RollRight")
-	var strafe : float = Input.get_action_strength("StrafeLeft") - Input.get_action_strength("StrafeRight")
+	var my_rotation : float = input.get_action_strength("Left") - input.get_action_strength("Right")
+	var pitch : float = input.get_action_strength("PitchUp") - input.get_action_strength("PitchDown")
+	var roll : float = input.get_action_strength("RollLeft") - input.get_action_strength("RollRight")
+	var strafe : float = input.get_action_strength("StrafeLeft") - input.get_action_strength("StrafeRight")
 	
 	
 	if adjustable_ground_distance:
-		var elevation : float = 1 if Input.is_action_just_pressed("ElevationUp") else -1 if Input.is_action_just_pressed("ElevationDown") else 0 
+		var elevation : float = 1 if input.is_action_just_pressed("ElevationUp") else -1 if input.is_action_just_pressed("ElevationDown") else 0 
 		target_elevation += elevation
 		if target_elevation < 1:
 			target_elevation = 1
@@ -110,13 +122,14 @@ func _physics_process(delta: float) -> void:
 	snap_to_track()
 	
 	# Get movement forces
-	vel += global_transform.basis.z * speed *  Input.get_action_strength("Forward") 
+	vel += global_transform.basis.z * speed *  input.get_action_strength("Forward") 
 	vel += global_transform.basis.x * strafe_speed * strafe 
 	
 	# Brakes (Only on ground)
 	if is_raycast_colliding():
 		#DoBrake
-		vel -= vel*brake_strength*Input.get_action_strength("Brake")
+		vel -= vel*brake_strength * input.get_action_strength("Brake")
+		
 	# Get turning
 	rotate_change = 0
 	pitch_change = 0

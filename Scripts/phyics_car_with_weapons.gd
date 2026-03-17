@@ -5,4 +5,4 @@ class_name CarWithWeapons
 
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
-	weapons_manager.handle_weapons.call_deferred(delta, velocity)
+	weapons_manager.handle_weapons.call_deferred(delta, velocity, input)

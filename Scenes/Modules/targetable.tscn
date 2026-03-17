@@ -8,6 +8,7 @@ script = ExtResource("1_5shyh")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=498176536]
 unique_name_in_owner = true
+visible = false
 billboard = 1
 no_depth_test = true
 texture = ExtResource("2_brmam")

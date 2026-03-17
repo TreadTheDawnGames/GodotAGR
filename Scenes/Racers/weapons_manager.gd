@@ -8,11 +8,13 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 # Called every frame from scene root
-func handle_weapons(delta : float, velocity : Vector3):
+func handle_weapons(delta : float, velocity : Vector3, input : DeviceInput):
 	
 	var targets_with_distance_away : Dictionary[Targetable3D, float]
 	
 	for target : Targetable3D in get_tree().get_nodes_in_group(&"Targetables"):
+		if target.owner == owner: 
+			continue
 		var space_state = get_world_3d().direct_space_state
 		# use global coordinates, not local to node
 		var query = PhysicsRayQueryParameters3D.create(global_position, target.global_position)
@@ -25,11 +27,11 @@ func handle_weapons(delta : float, velocity : Vector3):
 	for weapon : CarWeapon in weapons:
 		weapon.tick_weapon(delta, velocity, targets_with_distance_away)
 	
-	if Input.is_action_pressed("FirePrimary"):
+	if input.is_action_pressed("FirePrimary"):
 		if weapons.size() > 0:
 			weapons[0].fire()
 		pass
-	if Input.is_action_pressed("FireSecondary"):
+	if input.is_action_pressed("FireSecondary"):
 		if weapons.size() > 1:
 			weapons[1].fire()
 		pass

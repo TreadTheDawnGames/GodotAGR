@@ -4,8 +4,8 @@
 [ext_resource type="Script" uid="uid://cjc2ikrefvvdq" path="res://addons/zylann.hterrain/hterrain.gd" id="2_50ct6"]
 [ext_resource type="Resource" uid="uid://j5romqovq38o" path="res://Assets/Terrain/data.hterrain" id="3_ak5v8"]
 [ext_resource type="Script" uid="uid://cln80f4dwv35i" path="res://addons/zylann.hterrain/hterrain_texture_set.gd" id="3_hb2xm"]
-[ext_resource type="PackedScene" uid="uid://uhlj08qhmfqr" path="res://Scenes/Racers/phyics_car_with_weapons.tscn" id="5_ak5v8"]
 [ext_resource type="PackedScene" uid="uid://ct2cfmi4gtmcu" path="res://Scenes/Scenery/targetable_dummy.tscn" id="6_x033f"]
+[ext_resource type="PackedScene" uid="uid://bbb7v7tdg4mrf" path="res://Scenes/UI/lobby.tscn" id="7_rdbpf"]
 
 [sub_resource type="Resource" id="Resource_ak5v8"]
 script = ExtResource("3_hb2xm")
@@ -48,8 +48,9 @@ _data = {
 &"elevator": SubResource("Animation_x033f")
 }
 
-[node name="Node3D" type="Node3D" unique_id=1771197406]
+[node name="Node3D" type="Node3D" unique_id=1771197406 node_paths=PackedStringArray("spawn_position")]
 script = ExtResource("1_3dogw")
+spawn_position = NodePath("SpawnPosition")
 
 [node name="HTerrain" type="Node3D" parent="." unique_id=1408702683]
 script = ExtResource("2_50ct6")
@@ -125,9 +126,6 @@ shape = SubResource("BoxShape3D_oho3u")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D2/CollisionShape3D" unique_id=835489582]
 mesh = SubResource("BoxMesh_d3awe")
 
-[node name="PhysicsCarWithWeapons" parent="." unique_id=1233134335 instance=ExtResource("5_ak5v8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 261, 29, 216)
-
 [node name="TargetableDummy" parent="." unique_id=1796046090 instance=ExtResource("6_x033f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 256.4373, 23.983982, 235.35527)
 
@@ -136,3 +134,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 267.28894, 23.142405, 243.961
 
 [node name="TargetableDummy3" parent="." unique_id=510465165 instance=ExtResource("6_x033f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 272.71774, 26.787764, 235.35527)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1864015902]
+
+[node name="Lobby" parent="CanvasLayer" unique_id=408709469 instance=ExtResource("7_rdbpf")]
+
+[node name="SpawnPosition" type="Marker3D" parent="." unique_id=78675776]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 259.1031, 24.201666, 217.18524)
