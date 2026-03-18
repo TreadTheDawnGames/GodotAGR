@@ -21,7 +21,7 @@ func join(device: int):
 		# initialize default player data here
 		# "team" and "car" are remnants from my game just to provide an example
 		player_data[player] = {
-			"device": device,
+			&"device": device,
 		}
 		sig_player_joined.emit(player)
 

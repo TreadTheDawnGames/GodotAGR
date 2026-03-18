@@ -8,16 +8,15 @@ extends Node3D
 	]
 
 @export var CAR : PackedScene = preload("uid://uhlj08qhmfqr")
+
+@export var curr_level : Node = self
+
 @export var spawn_position : Marker3D
 
 var loading : bool = false
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	PlayerManager.sig_player_joined.connect(_spawn_ship)
-	await get_tree().create_timer(0.1).timeout
-	PlayerManager.join(0)
-	pass # Replace with function body.
+@onready var curr_screens: GridContainer = %Screens
+var viewport_associations : Dictionary[int, SubViewportContainer] = {}
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -26,6 +25,17 @@ func _process(_delta: float) -> void:
 		get_tree().reload_current_scene();
 		
 	pass
+	
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	
+	curr_screens.child_order_changed.connect(_update_screen_sizes)
+	
+	PlayerManager.sig_player_joined.connect(_spawn_ship)
+	PlayerManager.sig_player_left.connect(_remove_player)
+	await get_tree().create_timer(0.1).timeout
+	PlayerManager.join(-1)
+	pass # Replace with function body.
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is not InputEventKey or loading: return
@@ -40,10 +50,57 @@ func _unhandled_input(event: InputEvent) -> void:
 				print("Loading track: " + track_paths[parsed_num])
 	pass
 
-func _spawn_ship(player_index):
+func _spawn_ship(player_index : int):
 	var car : CarWithWeapons = CAR.instantiate()
 	if spawn_position:
 		car.global_position = spawn_position.global_position
-	car.set_input_device(PlayerManager.get_player_device(player_index))
-	add_child(car)
+	
+	car.ready_for_spawn(player_index)
+	var car_viewport : SubViewportContainer = curr_screens.get_child(0)
+	if player_index == 0:
+		curr_level.add_child(car)
+	else:
+		car_viewport = _add_viewport(car)
+	viewport_associations.get_or_add(player_index, car_viewport)
+	
+	pass
+
+func _remove_player(player_index : int):
+	if viewport_associations.has(player_index):
+		viewport_associations[player_index].queue_free()
+		viewport_associations.erase(player_index)
+		
+	pass
+
+#https://www.youtube.com/watch?v=V7eXQhqPt2Y
+func _add_viewport(for_car : CarBuiltInPhysics) -> SubViewportContainer:
+	var new_viewportcontainer : SubViewportContainer = SubViewportContainer.new()
+	var new_subviewport : SubViewport = SubViewport.new()
+	var new_label : Label = Label.new()
+	
+	new_label.text = str(for_car.player_index)
+	new_label.add_theme_font_size_override("normal", 50)
+	
+	new_subviewport.add_child(for_car)
+	new_viewportcontainer.add_child(new_subviewport)
+	new_viewportcontainer.add_child(new_label)
+	curr_screens.add_child(new_viewportcontainer)
+	
+	print("(viewport) Child count : " + str(curr_screens.get_child_count()))
+	
+	_update_screen_sizes()
+	return new_viewportcontainer
+
+#https://www.youtube.com/watch?v=V7eXQhqPt2Y
+func _update_screen_sizes():
+	@warning_ignore("integer_division")
+	curr_screens.columns = ceil(curr_screens.get_child_count()/2.0)
+	print("(screen sizes) Child count : " + str(curr_screens.get_child_count()))
+	for viewport_viewer in curr_screens.get_children():
+		var viewport : SubViewport = viewport_viewer.get_child(0)
+		var viewport_size : Vector2 = get_viewport().get_visible_rect().size
+		@warning_ignore("narrowing_conversion")
+		viewport.size.x = viewport_size.x/curr_screens.columns
+		viewport.size.y = viewport_size.y/ceil(float(curr_screens.get_child_count()/float(curr_screens.columns)))
+		
 	pass

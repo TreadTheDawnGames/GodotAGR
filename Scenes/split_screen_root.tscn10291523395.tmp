@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://dqc2330so8nau"]
+
+[ext_resource type="PackedScene" uid="uid://fw7eu7xwc1qq" path="res://Scenes/gym.tscn" id="1_7y0c5"]
+[ext_resource type="Script" uid="uid://dfd6pqrkjtakb" path="res://Scripts/debug_tools.gd" id="1_o5me4"]
+[ext_resource type="PackedScene" uid="uid://bbb7v7tdg4mrf" path="res://Scenes/UI/lobby.tscn" id="3_a7bpj"]
+
+[node name="SplitScreenRoot" type="Node3D" unique_id=1628531053 node_paths=PackedStringArray("curr_level")]
+script = ExtResource("1_o5me4")
+curr_level = NodePath("Screens/SubViewportContainer/SubViewport")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=53416123]
+
+[node name="Lobby" parent="CanvasLayer" unique_id=408709469 instance=ExtResource("3_a7bpj")]
+
+[node name="Screens" type="GridContainer" parent="." unique_id=240989831]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Screens" unique_id=1395323650]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SubViewport" type="SubViewport" parent="Screens/SubViewportContainer" unique_id=1688299036]
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="Gym" parent="Screens/SubViewportContainer/SubViewport" unique_id=1771197406 instance=ExtResource("1_7y0c5")]
+script = null
+
+[node name="Label" type="Label" parent="Screens" unique_id=718185968]
+layout_mode = 2

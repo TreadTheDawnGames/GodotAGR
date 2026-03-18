@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="AGR GDScript"
-run/main_scene="uid://fw7eu7xwc1qq"
+run/main_scene="uid://dqc2330so8nau"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 

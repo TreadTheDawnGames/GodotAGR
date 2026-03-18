@@ -5,6 +5,7 @@ class_name CarBuiltInPhysics
 
 @export var input_device_index : int = 0
 var input : DeviceInput
+var player_index : int = 0
 
 @export_category("Car stats")
 @export var speed : float = 1.0
@@ -39,6 +40,7 @@ var raycasts : Array[RayCast3D]= []
 
 @export var adjustable_ground_distance : bool = false
 @export var max_elevation : float = 3
+var target_elevation : float 
 
 
 var mesh : MeshInstance3D
@@ -78,14 +80,15 @@ func snap_to_track() -> void:
 		if np != null:
 			global_position = np + look * dif + n * ground_dist
 
-func _ready():
+func ready_for_spawn(_player_index : int):
 	for child : RayCast3D in get_children(true).filter(func(a:Node): return a is RayCast3D):
 		raycasts.append(child)
 		child.target_position.y = -ground_dist
+	player_index = _player_index
+	set_input_device(PlayerManager.get_player_device(player_index))
 
 func set_input_device(device_index : int):
 	input = DeviceInput.new(device_index)
-	pass
 
 func is_raycast_colliding() -> bool:
 	for  ray in raycasts:
@@ -93,10 +96,13 @@ func is_raycast_colliding() -> bool:
 			return true
 	return false
 
-var target_elevation : float 
 
 func _physics_process(delta: float) -> void:
-	input.is_known()
+	# Cache the actual device index and check to make sure 
+	var actual_input_device : int = input.device
+	if Input.get_connected_joypads().size() == 0:
+		input.device = -1
+	
 	# Create temp velocity vector
 	var vel : Vector3 = velocity
 	# Get inputs
@@ -115,9 +121,6 @@ func _physics_process(delta: float) -> void:
 			target_elevation = max_elevation
 		ground_dist = lerp(ground_dist, target_elevation, 0.25)
 		
-	
-	
-	
 	# Snap the machine to the track
 	snap_to_track()
 	
@@ -157,3 +160,6 @@ func _physics_process(delta: float) -> void:
 	velocity = vel
 	# Get updated ray cast information
 	move_and_slide()
+	
+	#reset the input device
+	input.device = actual_input_device
