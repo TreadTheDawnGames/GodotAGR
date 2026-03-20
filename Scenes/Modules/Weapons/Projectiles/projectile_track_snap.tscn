@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dpjyk5nk0vgeb"]
 
 [ext_resource type="Script" uid="uid://cojldv4l2fqtt" path="res://Scripts/projectiles/projectile_track_snap.gd" id="1_p8rhl"]
+[ext_resource type="Script" uid="uid://tsm81n5fkwr7" path="res://Scripts/Components/track_snapper.gd" id="2_43fsg"]
 [ext_resource type="Script" uid="uid://1461p1xmpfu6" path="res://Scripts/hitbox3d.gd" id="2_77652"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xifme"]
@@ -20,10 +21,17 @@ radius = 0.15
 [sub_resource type="SphereShape3D" id="SphereShape3D_4af56"]
 radius = 0.1
 
-[node name="Projectile" type="CharacterBody3D" unique_id=1994070456]
+[node name="Projectile" type="CharacterBody3D" unique_id=1994070456 node_paths=PackedStringArray("hitbox")]
 collision_layer = 0
 collision_mask = 3
 script = ExtResource("1_p8rhl")
+hitbox = NodePath("Area3D")
+lifespan = 5.0
+
+[node name="TrackSnapper" type="Node" parent="." unique_id=449726649]
+script = ExtResource("2_43fsg")
+ground_dist = 1.5
+metadata/_custom_type_script = "uid://tsm81n5fkwr7"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=885905165]
 mesh = SubResource("SphereMesh_xifme")
@@ -38,3 +46,7 @@ shape = SubResource("SphereShape3D_vupct")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=764514066]
 shape = SubResource("SphereShape3D_4af56")
+
+[node name="RayCast3D" type="RayCast3D" parent="." unique_id=1807823623]
+unique_name_in_owner = true
+target_position = Vector3(0, -10, 0)

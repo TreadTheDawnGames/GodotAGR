@@ -23,6 +23,7 @@ script = ExtResource("1_or2hj")
 [node name="TrackSnapper" type="Node" parent="." unique_id=1984121014]
 unique_name_in_owner = true
 script = ExtResource("2_n0o01")
+use_acceleration = false
 
 [node name="InputManger_Player" type="Node" parent="." unique_id=833981559]
 unique_name_in_owner = true

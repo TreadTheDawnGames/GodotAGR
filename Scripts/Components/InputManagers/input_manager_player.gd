@@ -2,7 +2,7 @@ extends InputManager
 class_name InputManager_Player
 
 func _physics_process(_delta: float) -> void:
-	my_rotation = input.get_action_strength("Left") - input.get_action_strength("Right")
+	rotation_change = input.get_action_strength("Left") - input.get_action_strength("Right")
 	pitch = input.get_action_strength("PitchUp") - input.get_action_strength("PitchDown")
 	roll = input.get_action_strength("RollLeft") - input.get_action_strength("RollRight")
 	strafe = input.get_action_strength("StrafeLeft") - input.get_action_strength("StrafeRight")

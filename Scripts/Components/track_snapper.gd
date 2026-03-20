@@ -1,7 +1,7 @@
 extends Node
 class_name TrackSnapper
 
-@export_category("Car stats")
+@export var use_acceleration : bool = true
 @export var speed : float = 1.0
 @export var strafe_speed : float = 0.5
 
@@ -89,7 +89,7 @@ func is_raycast_colliding() -> bool:
 ## [br]character_body : The body to snap
 ## [br]input_manager : The how to control the body
 ## [br]delta : delta time
-func perform_snap(character_body : CharacterBody3D, c_input_manger : InputManager, delta : float) -> void:
+func perform_snap(character_body : CharacterBody3D, acceleration : float, strafe : float, brake : float, rotation_change : float, pitch : float, roll : float, elevation : float, delta : float) -> void:
 	if raycasts.size() == 0:
 		push_error("There are no rays in the raycasts array for " + name+". Owner: " + owner.name + ". It is impossible for this node to snap. Disabling process.")
 		set_physics_process(false)
@@ -101,7 +101,7 @@ func perform_snap(character_body : CharacterBody3D, c_input_manger : InputManage
 	
 	if adjustable_ground_distance:
 		#var elevation : float = 1 if input.is_action_just_pressed("ElevationUp") else -1 if input.is_action_just_pressed("ElevationDown") else 0 
-		target_elevation += c_input_manger.elevation
+		target_elevation += elevation
 		if target_elevation < 1:
 			target_elevation = 1
 		elif target_elevation > max_elevation:
@@ -114,28 +114,29 @@ func perform_snap(character_body : CharacterBody3D, c_input_manger : InputManage
 	global_position = snapped_vars[1]
 	
 	# Get movement forces
-	vel += global_transform.basis.z * speed *  c_input_manger.acceleration
-	vel += global_transform.basis.x * strafe_speed * c_input_manger.strafe 
+	#if use_acceleration:
+	vel += global_transform.basis.z * speed * acceleration
+	vel += global_transform.basis.x * strafe_speed * strafe 
 	
+
 	# Brakes (Only on ground)
 	if is_raycast_colliding():
 		#DoBrake
-		vel -= vel*brake_strength * c_input_manger.brake
+		vel -= vel*brake_strength * brake
 		
 	# Get turning
 	rotate_change = 0
 	pitch_change = 0
 	roll_change = 0
-	rotate_change = rotate_speed * clamp(c_input_manger.my_rotation,-1,1) * delta
-	print("rotate change: " + str(rotate_change))
+	rotate_change = rotate_speed * clamp(rotation_change,-1,1) * delta
 	# Air controls
-	if (!is_raycast_colliding()): pitch_change = pitch_speed * clamp(c_input_manger.pitch,-1,1) * delta
-	if (!is_raycast_colliding()): roll_change = -roll_speed * clamp(c_input_manger.roll,-1,1) * delta
+	if (!is_raycast_colliding()): pitch_change = pitch_speed * clamp(pitch,-1,1) * delta
+	if (!is_raycast_colliding()): roll_change = -roll_speed * clamp(roll,-1,1) * delta
 	
 	# Apply rotation
-	character_body.rotate(global_transform.basis.y, rotate_change)
-	character_body.rotate(global_transform.basis.x, pitch_change)
-	character_body.rotate(global_transform.basis.z, roll_change)
+	global_transform.basis = global_transform.basis.rotated(global_transform.basis.y, rotate_change)
+	global_transform.basis = global_transform.basis.rotated(global_transform.basis.x, pitch_change)
+	global_transform.basis = global_transform.basis.rotated(global_transform.basis.z, roll_change)
 	
 	# Handle passive forces
 	if !is_raycast_colliding():

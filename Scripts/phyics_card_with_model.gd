@@ -35,7 +35,7 @@ func _physics_process(delta: float) -> void:
 	#if Input.get_connected_joypads().size() == 0:
 		#c_input_manger.device = -1
 	
-	c_track_snapper.perform_snap(self, c_input_manger, delta)
+	c_track_snapper.perform_snap(self, c_input_manger.acceleration, c_input_manger.strafe, c_input_manger.brake, c_input_manger.rotation_change, c_input_manger.pitch, c_input_manger.roll, c_input_manger.elevation, delta)
 	
 	#reset the input device
 	#c_input_manger.input.device = actual_input_device

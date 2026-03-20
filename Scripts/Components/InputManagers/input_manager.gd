@@ -4,7 +4,7 @@ class_name InputManager
 @export var device : int = 0
 var input : DeviceInput
 
-@export var my_rotation : float = 0.0
+@export var rotation_change : float = 0.0
 @export var pitch : float = 0.0
 @export var roll : float = 0.0
 @export var strafe : float = 0.0
@@ -19,7 +19,7 @@ func set_input_device(device_index : int):
 
 func any_input() -> bool:
 	return(
-	my_rotation != 0 or
+	rotation_change != 0 or
 	pitch != 0 or
 	roll != 0 or
 	strafe != 0 or

@@ -84,7 +84,7 @@ func fire():
 
 func _spawn_projectile(marker : Marker3D, direction : Vector3):
 	var spawned_projectile : CarWeaponProjectile = projectile.instantiate()
-	get_tree().current_scene.add_child(spawned_projectile)
 	spawned_projectile.global_position = marker.global_position + direction
 	spawned_projectile.speed += velocity.length()
 	spawned_projectile.direction = direction.normalized()
+	get_tree().current_scene.add_child(spawned_projectile)
