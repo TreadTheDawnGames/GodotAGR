@@ -1,14 +1,20 @@
 extends Node3D
 class_name CarWeaponManager
 
-@export var weapons : Array[CarWeapon] = []
+@export var weapons : Dictionary[StringName, CarWeapon] = {&"primary" : null, &"secondary" : null}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	print("child count: " + str(get_child_count()))
+	if get_child_count() > 0:
+		set_primary(get_child(0))
+	if get_child_count() > 1:
+		set_secondary(get_child(1))
+		
 	pass # Replace with function body.
 
 # Called every frame from scene root
-func handle_weapons(delta : float, velocity : Vector3, input : DeviceInput):
+func handle_weapons(delta : float, velocity : Vector3, input_manager : InputManager):
 	
 	var targets_with_distance_away : Dictionary[Targetable3D, float]
 	
@@ -24,15 +30,24 @@ func handle_weapons(delta : float, velocity : Vector3, input : DeviceInput):
 				targets_with_distance_away.get_or_add(target, (global_position - (result["position"] as Vector3)).length())
 		pass
 	
-	for weapon : CarWeapon in weapons:
-		weapon.tick_weapon(delta, velocity, targets_with_distance_away)
+	for weapon : CarWeapon in weapons.values():
+		if weapon:
+			weapon.tick_weapon(delta, velocity, targets_with_distance_away)
 	
-	if input.is_action_pressed("FirePrimary"):
+	if input_manager.fire_primary and weapons[&"primary"]:
 		if weapons.size() > 0:
-			weapons[0].fire()
+			weapons[&"primary"].fire()
 		pass
-	if input.is_action_pressed("FireSecondary"):
+	if input_manager.fire_secondary and weapons[&"secondary"]:
 		if weapons.size() > 1:
-			weapons[1].fire()
+			weapons[&"secondary"].fire()
 		pass
+	pass
+
+func set_primary(weapon : CarWeapon):
+	weapons[&"primary"] = weapon
+	pass
+
+func set_secondary(weapon : CarWeapon):
+	weapons[&"secondary"] = weapon
 	pass

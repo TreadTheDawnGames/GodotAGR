@@ -25,8 +25,6 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	speed = lerp(speed, target_speed, acceleration*delta)
 	velocity = direction * speed * delta
-
-	
 	var collision = move_and_collide(velocity)
 	if collision:
 		queue_free()

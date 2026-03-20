@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://bny7nn3jaal31" path="res://Scripts/phyics_card_with_model.gd" id="1_or2hj"]
 [ext_resource type="Script" uid="uid://ckvro8h27plew" path="res://Scripts/visual_part_of_car.gd" id="2_50kln"]
+[ext_resource type="Script" uid="uid://bvu5mirjj4s8c" path="res://Scripts/Components/InputManagers/input_manager.gd" id="2_302mq"]
+[ext_resource type="Script" uid="uid://tsm81n5fkwr7" path="res://Scripts/Components/track_snapper.gd" id="2_n0o01"]
 [ext_resource type="PackedScene" uid="uid://d02oipvdp3d7u" path="res://Scenes/Tracks/racer1.tscn" id="3_mhdb0"]
 [ext_resource type="Script" uid="uid://ctyb0ta0atok8" path="res://Scripts/camera_dampner.gd" id="5_3jyv5"]
 
@@ -17,6 +19,14 @@
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_or2hj")
+
+[node name="TrackSnapper" type="Node" parent="." unique_id=1984121014]
+unique_name_in_owner = true
+script = ExtResource("2_n0o01")
+
+[node name="InputManger_Player" type="Node" parent="." unique_id=833981559]
+unique_name_in_owner = true
+script = ExtResource("2_302mq")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1674258501]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)

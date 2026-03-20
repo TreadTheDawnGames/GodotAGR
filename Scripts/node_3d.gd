@@ -52,7 +52,7 @@ func tick_weapon(delta : float, _velocity : Vector3, targets : Dictionary[Target
 	velocity = _velocity
 
 func fire():
-	owner.reparent(get_tree().root.get_node("/root/SplitScreenRoot/GridContainer/SubViewportContainer2/SubViewport"))
+	#owner.reparent(get_tree().root.get_node("/root/SplitScreenRoot/GridContainer/SubViewportContainer2/SubViewport"))
 	if _cooldown_time <= 0:
 		for i : int in amount:
 			# Gets the "forward" direction relative to the weapon and adjusts the position based on 
