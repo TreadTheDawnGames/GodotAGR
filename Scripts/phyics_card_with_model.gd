@@ -17,12 +17,13 @@ func ensure_components():
 		c_track_snapper = get_node("%TrackSnapper")
 
 func ready_for_spawn(_player_index : int):
+	player_index = _player_index
 	ensure_components()
+	
 	var rays : Array[RayCast3D]
 	for ray in get_children(true).filter(func(a:Node): return a is RayCast3D):
 		rays.append(ray)
 	c_track_snapper.assign_raycasts(rays)
-	player_index = _player_index
 	c_input_manger.set_input_device(PlayerManager.get_player_device(player_index))
 
 
@@ -30,11 +31,11 @@ func ready_for_spawn(_player_index : int):
 
 func _physics_process(delta: float) -> void:
 	# Cache the actual device index and check to make sure 
-	var actual_input_device : int = c_input_manger.device
-	if Input.get_connected_joypads().size() == 0:
-		c_input_manger.device = -1
+	#var actual_input_device : int = c_input_manger.device
+	#if Input.get_connected_joypads().size() == 0:
+		#c_input_manger.device = -1
 	
 	c_track_snapper.perform_snap(self, c_input_manger, delta)
 	
 	#reset the input device
-	c_input_manger.input.device = actual_input_device
+	#c_input_manger.input.device = actual_input_device

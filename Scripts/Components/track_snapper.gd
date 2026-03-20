@@ -49,7 +49,8 @@ func align_with_y(xfrom : Transform3D, newy : Vector3) ->  Transform3D:
 	xfrom.basis = xfrom.basis.orthonormalized()
 	return(xfrom)
 
-func snap_to_track(global_transform : Transform3D, global_position : Vector3) -> void:
+## Modifies global_transform and global_position and returns them as a tuple [Transform3D, Vector3]
+func snap_to_track(global_transform : Transform3D, global_position : Vector3) -> Array:
 	var n : Vector3 = Vector3(0,0,0)
 	var count = 0
 	var np : Vector3
@@ -76,6 +77,7 @@ func snap_to_track(global_transform : Transform3D, global_position : Vector3) ->
 				break
 		if np != null:
 			global_position = np + look * dif + n * ground_dist
+	return [global_transform, global_position]
 
 func is_raycast_colliding() -> bool:
 	for  ray in raycasts:
@@ -91,7 +93,6 @@ func perform_snap(character_body : CharacterBody3D, c_input_manger : InputManage
 	if raycasts.size() == 0:
 		push_error("There are no rays in the raycasts array for " + name+". Owner: " + owner.name + ". It is impossible for this node to snap. Disabling process.")
 		set_physics_process(false)
-	
 	# Create temp velocity vector
 	var vel : Vector3 = character_body.velocity
 	
@@ -108,7 +109,9 @@ func perform_snap(character_body : CharacterBody3D, c_input_manger : InputManage
 		ground_dist = lerp(ground_dist, target_elevation, 0.25)
 		
 	# Snap the machine to the track
-	snap_to_track(global_transform, global_position)
+	var snapped_vars : Array = snap_to_track(global_transform, global_position)
+	global_transform = snapped_vars[0]
+	global_position = snapped_vars[1]
 	
 	# Get movement forces
 	vel += global_transform.basis.z * speed *  c_input_manger.acceleration
@@ -124,7 +127,7 @@ func perform_snap(character_body : CharacterBody3D, c_input_manger : InputManage
 	pitch_change = 0
 	roll_change = 0
 	rotate_change = rotate_speed * clamp(c_input_manger.my_rotation,-1,1) * delta
-	
+	print("rotate change: " + str(rotate_change))
 	# Air controls
 	if (!is_raycast_colliding()): pitch_change = pitch_speed * clamp(c_input_manger.pitch,-1,1) * delta
 	if (!is_raycast_colliding()): roll_change = -roll_speed * clamp(c_input_manger.roll,-1,1) * delta
@@ -143,5 +146,7 @@ func perform_snap(character_body : CharacterBody3D, c_input_manger : InputManage
 		vel += vel * (-1 * friction) # Friction force
 
 	# Apply velocity
+	character_body.global_transform = global_transform
+	character_body.global_position = global_position
 	character_body.velocity = vel
 	character_body.move_and_slide()

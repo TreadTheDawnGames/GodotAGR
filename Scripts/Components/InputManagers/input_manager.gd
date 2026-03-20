@@ -16,3 +16,16 @@ var input : DeviceInput
 
 func set_input_device(device_index : int):
 	input = DeviceInput.new(device_index)
+
+func any_input() -> bool:
+	return(
+	my_rotation != 0 or
+	pitch != 0 or
+	roll != 0 or
+	strafe != 0 or
+	elevation != 0 or
+	acceleration != 0 or
+	brake != 0 or
+	fire_primary or
+	fire_secondary
+	)

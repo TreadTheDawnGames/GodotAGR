@@ -5,7 +5,6 @@ class_name CarWeaponManager
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	print("child count: " + str(get_child_count()))
 	if get_child_count() > 0:
 		set_primary(get_child(0))
 	if get_child_count() > 1:
@@ -15,7 +14,6 @@ func _ready() -> void:
 
 # Called every frame from scene root
 func handle_weapons(delta : float, velocity : Vector3, input_manager : InputManager):
-	
 	var targets_with_distance_away : Dictionary[Targetable3D, float]
 	
 	for target : Targetable3D in get_tree().get_nodes_in_group(&"Targetables"):

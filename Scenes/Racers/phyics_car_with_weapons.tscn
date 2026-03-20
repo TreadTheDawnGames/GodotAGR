@@ -12,19 +12,18 @@
 collision_layer = 8
 script = ExtResource("2_ynbrd")
 weapons_manager = NodePath("VisualPartOfCar/craft_racer2/WeaponsManager")
-c_input_manger = NodePath("InputHandler")
+c_input_manger = NodePath("InputManger_Player")
 
-[node name="InputHandler" type="Node" parent="." index="0" unique_id=941452028]
-script = ExtResource("3_se88i")
-
-[node name="Targetable3D" type="Node3D" parent="." index="1" unique_id=58137265]
+[node name="Targetable3D" type="Node3D" parent="." index="0" unique_id=58137265]
 script = ExtResource("3_cd100")
 metadata/_custom_type_script = "uid://b0dna7lmhpgof"
 
-[node name="WeaponsManager" type="Node3D" parent="VisualPartOfCar/craft_racer2" parent_id_path=PackedInt32Array(400414786) index="1" unique_id=1873970340 node_paths=PackedStringArray("weapons")]
+[node name="InputManger_Player" parent="." index="2" unique_id=833981559]
+script = ExtResource("3_se88i")
+
+[node name="WeaponsManager" type="Node3D" parent="VisualPartOfCar/craft_racer2" parent_id_path=PackedInt32Array(400414786) index="1" unique_id=1873970340]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.900529, -0.18390921)
 script = ExtResource("3_grbwd")
-weapons = {}
 
 [node name="Weapon_DoubleShot" parent="VisualPartOfCar/craft_racer2/WeaponsManager" index="0" unique_id=693924245 instance=ExtResource("5_wwejg")]
 cooldown = 0.1
