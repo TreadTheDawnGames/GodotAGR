@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://casa5t1hyic8t"]
+[gd_scene format=3 uid="uid://6d4n4to0j55y"]
 
-[ext_resource type="Script" path="res://Scripts/Scenery/boost_pad.gd" id="1_r7hae"]
+[ext_resource type="Script" uid="uid://bh2e2vs5i6jdh" path="res://Scripts/Scenery/boost_pad.gd" id="1_r7hae"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_x3okr"]
 size = Vector3(2, 2.2763672, 4)
