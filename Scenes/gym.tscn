@@ -141,4 +141,4 @@ shadow_enabled = true
 
 [node name="BoostPad" parent="." unique_id=1909167331 instance=ExtResource("6_c256x")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.627995, -6.099414, 9.8893175)
-boost_power = 5.0
+boost_power = 2.5
