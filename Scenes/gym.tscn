@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dfd6pqrkjtakb" path="res://Scripts/debug_tools.gd" id="1_3dogw"]
 [ext_resource type="Script" uid="uid://cjc2ikrefvvdq" path="res://addons/zylann.hterrain/hterrain.gd" id="2_50ct6"]
-[ext_resource type="Resource" uid="uid://j5romqovq38o" path="res://Assets/Terrain/data.hterrain" id="3_ak5v8"]
+[ext_resource type="Resource" path="res://Assets/Terrain/data.hterrain" id="3_ak5v8"]
 [ext_resource type="Script" uid="uid://cln80f4dwv35i" path="res://addons/zylann.hterrain/hterrain_texture_set.gd" id="3_hb2xm"]
 [ext_resource type="PackedScene" uid="uid://ct2cfmi4gtmcu" path="res://Scenes/Scenery/targetable_dummy.tscn" id="6_x033f"]
 
@@ -46,6 +46,10 @@ _data = {
 &"RESET": SubResource("Animation_ak5v8"),
 &"elevator": SubResource("Animation_x033f")
 }
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_stjpo"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_c256x"]
 
 [node name="Gym" type="Node3D" unique_id=1771197406 node_paths=PackedStringArray("spawn_position")]
 script = ExtResource("1_3dogw")
@@ -104,12 +108,15 @@ mesh = SubResource("BoxMesh_d3awe")
 
 [node name="TargetableDummy" parent="HTerrain" unique_id=1796046090 instance=ExtResource("6_x033f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 256.4373, 23.983982, 235.35527)
+script = null
 
 [node name="TargetableDummy2" parent="HTerrain" unique_id=1880961339 instance=ExtResource("6_x033f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 267.28894, 23.142405, 243.96153)
+script = null
 
 [node name="TargetableDummy3" parent="HTerrain" unique_id=510465165 instance=ExtResource("6_x033f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 272.71774, 26.787764, 235.35527)
+script = null
 
 [node name="SpawnPosition" type="Marker3D" parent="HTerrain" unique_id=78675776]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 259.1031, 24.201666, 217.18524)
@@ -137,3 +144,13 @@ metadata/_custom_type_script = "uid://cjc2ikrefvvdq"
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=451234652]
 transform = Transform3D(1, 0, 0, 0, 0.8290376, 0.5591929, 0, -0.5591929, 0.8290376, 260, 91.1832, 224)
 shadow_enabled = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1699145500]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -269.409, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1511224235]
+transform = Transform3D(1000, 0, 0, 0, 1, 0, 0, 0, 50, -468.10126, 3.0517578e-05, 0)
+shape = SubResource("BoxShape3D_stjpo")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D" unique_id=1665306598]
+mesh = SubResource("BoxMesh_c256x")

@@ -6,23 +6,42 @@
 [ext_resource type="Script" uid="uid://bb72cp6bivsih" path="res://Scenes/Racers/weapons_manager.gd" id="3_grbwd"]
 [ext_resource type="Script" uid="uid://da6cu6kgof6jy" path="res://Scripts/Components/InputManagers/input_manager_player.gd" id="3_se88i"]
 [ext_resource type="PackedScene" uid="uid://cpl7ns70xmc8b" path="res://Scenes/Modules/Weapons/weapon.tscn" id="4_grbwd"]
+[ext_resource type="Script" uid="uid://da0ewjkyagh86" path="res://Scripts/Components/damage_manager.gd" id="4_jn7t0"]
 [ext_resource type="PackedScene" uid="uid://cmwcd7bds5t4q" path="res://Scenes/Modules/Weapons/weapon_doubleshot.tscn" id="5_wwejg"]
 [ext_resource type="PackedScene" uid="uid://dpjyk5nk0vgeb" path="res://Scenes/Modules/Weapons/Projectiles/projectile_track_snap.tscn" id="7_qw4xn"]
+[ext_resource type="Script" uid="uid://02nuflff8ocj" path="res://Scripts/Components/ship_hud.gd" id="10_c0tx4"]
 
-[node name="PhysicsCarWithWeapons" unique_id=1233134335 node_paths=PackedStringArray("weapons_manager", "c_input_manger") instance=ExtResource("1_mirks")]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jn7t0"]
+radius = 0.55
+height = 2.05
+
+[node name="PhysicsCarWithWeapons" unique_id=1233134335 node_paths=PackedStringArray("c_weapons_manager", "c_input_manger") instance=ExtResource("1_mirks")]
 collision_layer = 8
 script = ExtResource("2_ynbrd")
-weapons_manager = NodePath("VisualPartOfCar/craft_racer2/WeaponsManager")
+c_weapons_manager = NodePath("VisualPartOfCar/craft_racer2/WeaponsManager")
+hitpoints = 50.0
 c_input_manger = NodePath("InputManger_Player")
 
-[node name="Targetable3D" type="Node3D" parent="." index="0" unique_id=58137265]
+[node name="Area3D" type="Area3D" parent="." index="0" unique_id=864756974]
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Area3D" index="0" unique_id=389225530]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_jn7t0")
+
+[node name="Targetable3D" type="Node3D" parent="." index="1" unique_id=58137265]
 script = ExtResource("3_cd100")
 metadata/_custom_type_script = "uid://b0dna7lmhpgof"
 
-[node name="InputManger_Player" parent="." index="2" unique_id=833981559]
+[node name="DamageManager" type="Node" parent="." index="2" unique_id=1093661782 node_paths=PackedStringArray("hurtbox")]
+unique_name_in_owner = true
+script = ExtResource("4_jn7t0")
+hurtbox = NodePath("../Area3D")
+
+[node name="InputManger_Player" parent="." index="4" unique_id=833981559]
 script = ExtResource("3_se88i")
 
 [node name="WeaponsManager" type="Node3D" parent="VisualPartOfCar/craft_racer2" parent_id_path=PackedInt32Array(400414786) index="1" unique_id=1873970340]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.900529, -0.18390921)
 script = ExtResource("3_grbwd")
 
@@ -33,3 +52,37 @@ amount = 1
 spread = 0.0
 
 [node name="BaseWeapon" parent="VisualPartOfCar/craft_racer2/WeaponsManager" index="1" unique_id=2010869066 instance=ExtResource("4_grbwd")]
+
+[node name="ShipHud" type="Control" parent="." index="18" unique_id=1033596883]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("10_c0tx4")
+
+[node name="SpeedLabel" type="Label" parent="ShipHud" index="0" unique_id=315054028]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -361.0
+offset_top = -108.0
+offset_right = -94.0
+offset_bottom = -85.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Speed: 0000"
+
+[node name="HitpointBar" type="ProgressBar" parent="ShipHud" index="1" unique_id=1113414884]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 209.0
+offset_top = 570.0
+offset_right = 442.0
+offset_bottom = 597.0
+show_percentage = false

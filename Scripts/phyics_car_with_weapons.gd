@@ -1,8 +1,21 @@
 extends CarBuiltInPhysics
 class_name CarWithWeapons
 
-@export var weapons_manager : CarWeaponManager
+signal sig_processed(speed : float) 
+
+@export var  c_weapons_manager : CarWeaponManager
+@onready var c_damage_manager: DamageManager = %DamageManager
+#@onready var c_track_snapper: TrackSnapper = %TrackSnapper
+@export var hitpoints : float = 50.0
+@onready var c_ship_hud: ShipHUD = $ShipHud
+
+func _ready() -> void:
+	c_damage_manager.max_hitpoints = hitpoints
+	c_ship_hud.setup(hitpoints)
+	
+	pass
 
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
-	weapons_manager.handle_weapons.call_deferred(delta, velocity, c_input_manger)
+	c_weapons_manager.handle_weapons.call_deferred(delta, velocity, c_input_manger)
+	sig_processed.emit(velocity.dot(transform.basis.z)) 

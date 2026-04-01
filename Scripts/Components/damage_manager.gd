@@ -25,7 +25,7 @@ var curr_hitpoints : float = 50.0:
 enum DamageState {FULL, HEALED, DAMAGED, TEETERING, DEAD}
 var curr_damage_state : DamageState = DamageState.FULL
 
-signal sig_damaged(damage_state : DamageState)
+signal sig_damaged(damage_state : DamageState, hitpoints : float)
 signal sig_next_damage_state(damage_state : DamageState)
 
 func _ready():
@@ -36,15 +36,15 @@ func _ready():
 # 
 func take_damage(amount : float):
 	curr_hitpoints -= amount
-	sig_damaged.emit(curr_damage_state)
+	sig_damaged.emit(curr_damage_state, curr_hitpoints)
 
 func set_hitpoints(amount : float):
 	curr_hitpoints = amount
-	sig_damaged.emit(curr_damage_state)
+	sig_damaged.emit(curr_damage_state, curr_hitpoints)
 
 func reset_hitpoints():
 	curr_hitpoints = max_hitpoints
-	sig_damaged.emit(curr_damage_state)
+	sig_damaged.emit(curr_damage_state, curr_hitpoints)
 
 func _projectile_detected(area : Area3D):
 	if area is not ProjectileHitbox:
