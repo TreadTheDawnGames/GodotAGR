@@ -36,6 +36,8 @@ var was_y_vel : float = 0
 @export var max_elevation : float = 3
 var target_elevation : float 
 
+var curr_boost_power : float = 0.0
+
 func assign_raycasts(rays : Array[RayCast3D]):
 	raycasts = rays
 	for ray in raycasts:
@@ -115,7 +117,7 @@ func perform_snap(character_body : CharacterBody3D, acceleration : float, strafe
 	
 	# Get movement forces
 	#if use_acceleration:
-	vel += global_transform.basis.z * speed * acceleration
+	vel += global_transform.basis.z * speed * (acceleration + curr_boost_power)
 	vel += global_transform.basis.x * strafe_speed * strafe 
 	
 
@@ -151,3 +153,9 @@ func perform_snap(character_body : CharacterBody3D, acceleration : float, strafe
 	character_body.global_position = global_position
 	character_body.velocity = vel
 	character_body.move_and_slide()
+	
+func boost(boost_amount : float, boost_time : float = 1.0):
+	curr_boost_power += boost_amount
+	await get_tree().create_timer(boost_time).timeout
+	curr_boost_power-=boost_amount
+	pass

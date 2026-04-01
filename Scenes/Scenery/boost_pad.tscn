@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://6d4n4to0j55y"]
+
+[ext_resource type="Script" uid="uid://bh2e2vs5i6jdh" path="res://Scripts/Scenery/boost_pad.gd" id="1_r7hae"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x3okr"]
+size = Vector3(2, 2.2763672, 4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1q0qu"]
+albedo_color = Color(1, 1, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_hc0of"]
+material = SubResource("StandardMaterial3D_1q0qu")
+size = Vector3(2, 0.2, 4)
+
+[node name="BoostPad" type="Node3D" unique_id=1909167331]
+script = ExtResource("1_r7hae")
+boost_power = 2.0
+boost_time = 0.5
+
+[node name="DetectionArea" type="Area3D" parent="." unique_id=1023150467]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.49456757, 0)
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionArea" unique_id=1031560405]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.66162115, 0)
+shape = SubResource("BoxShape3D_x3okr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1891759438]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03161502, 0)
+mesh = SubResource("BoxMesh_hc0of")

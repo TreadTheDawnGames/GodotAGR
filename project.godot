@@ -32,6 +32,10 @@ settings/addon_root_folder="res://addons/debug_draw_3d"
 
 enabled=PackedStringArray("res://addons/PathMesh3D/plugin.cfg", "res://addons/interpolated_camera_3d/plugin.cfg", "res://addons/multiplayer_input/plugin.cfg", "res://addons/zylann.hterrain/plugin.cfg")
 
+[filesystem]
+
+import/blender/enabled=false
+
 [input]
 
 Forward={
