@@ -1,13 +1,25 @@
 [gd_scene format=3 uid="uid://ct2cfmi4gtmcu"]
 
 [ext_resource type="PackedScene" uid="uid://c2cco1njjauv0" path="res://Assets/Models/RepositionedModels/satellite_dish_detailed_2.tscn" id="1_260ng"]
+[ext_resource type="Script" uid="uid://da0ewjkyagh86" path="res://Scripts/Components/damage_manager.gd" id="1_h87hp"]
+[ext_resource type="Script" uid="uid://cgw2v2jwc8k7i" path="res://Scripts/Scenes/targetable_dummy.gd" id="1_i22xt"]
 [ext_resource type="PackedScene" uid="uid://4cs5w08i025b" path="res://Scenes/Modules/targetable.tscn" id="2_h87hp"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_i22xt"]
 height = 0.6279297
 radius = 0.3564453
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_rtpj1"]
+height = 0.7
+radius = 0.4
+
 [node name="TargetableDummy" type="RigidBody3D" unique_id=1796046090]
+script = ExtResource("1_i22xt")
+
+[node name="DamageManager" type="Node" parent="." unique_id=1655514031 node_paths=PackedStringArray("hurtbox")]
+unique_name_in_owner = true
+script = ExtResource("1_h87hp")
+hurtbox = NodePath("../Hurtbox")
 
 [node name="satelliteDish_detailed3" parent="." unique_id=1311051714 instance=ExtResource("1_260ng")]
 transform = Transform3D(3.525, 0, 0, 0, 3.525, 0, 0, 0, 3.525, 0, 0, 0)
@@ -18,3 +30,11 @@ shape = SubResource("CylinderShape3D_i22xt")
 
 [node name="Targetable" parent="." unique_id=1799438792 instance=ExtResource("2_h87hp")]
 transform = Transform3D(3.525, 0, 0, 0, 3.525, 0, 0, 0, 3.525, 0, 1.1398511, 0)
+
+[node name="Hurtbox" type="Area3D" parent="." unique_id=1676669891]
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Hurtbox" unique_id=1371070421]
+transform = Transform3D(3.525, 0, 0, 0, 3.525, 0, 0, 0, 3.525, 0, 1.1066895, 0)
+shape = SubResource("CylinderShape3D_rtpj1")

@@ -16,6 +16,7 @@ var direction : Vector3 = Vector3.RIGHT
 func _ready() -> void:
 	speed = initial_speed
 	hitbox.area_entered.connect(_on_hitbox_area_entered)
+	hitbox.body_entered.connect(_on_hitbox_body_entered)
 	
 	await get_tree().create_timer(lifespan).timeout
 	await _before_lifespan_expired()
@@ -25,12 +26,18 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	speed = lerp(speed, target_speed, acceleration*delta)
 	velocity = direction * speed * delta
-	var collision = move_and_collide(velocity)
-	if collision:
-		queue_free()
+	move_and_collide(velocity)
+	#if collision:
+		#queue_free()
 
 func _before_lifespan_expired():
 	pass
 
 func _on_hitbox_area_entered(_area : Area3D):
+	print("Thinings")
+	queue_free()
+
+func _on_hitbox_body_entered(_body : Node3D):
+	print("Thinings")
+	queue_free()
 	pass
