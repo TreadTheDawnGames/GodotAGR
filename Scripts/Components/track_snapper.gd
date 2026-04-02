@@ -24,6 +24,7 @@ var was_y_vel : float = 0
 @export var raycasts : Array[RayCast3D]= []
 
 @export var friction : float = 0.125/10
+@export var air_friction : float = 0.125/15
 
 @export var ground_dist : float = 1 :
 	set(new_val):
@@ -142,7 +143,9 @@ func perform_snap(character_body : CharacterBody3D, acceleration : float, strafe
 	
 	# Handle passive forces
 	if !is_raycast_colliding():
-		vel += Vector3(0, -1 * gravity, 0)
+		vel += Vector3(0, -1 * gravity, 0) 
+		vel -= vel * air_friction # Friction force
+		
 	else:
 		was_y_vel = global_transform.basis.y.dot(vel)
 		vel -= global_transform.basis.y*global_transform.basis.y.dot(vel) # Cancel downward movement
