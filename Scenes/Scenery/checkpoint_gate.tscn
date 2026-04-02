@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://cwc2c3lsm2dkt"]
+
+[ext_resource type="Script" uid="uid://c8s8y8ax7uuh" path="res://Scenes/Scenery/checkpoint_gate.gd" id="1_lsxwm"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_q3sh1"]
+size = Vector3(25, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_lsxwm"]
+size = Vector3(1, 10, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xe377"]
+size = Vector3(24.46859, 10.360382, 1)
+
+[node name="CheckpointGate" type="Node3D" unique_id=313476707]
+script = ExtResource("1_lsxwm")
+
+[node name="Top" type="MeshInstance3D" parent="." unique_id=1907551773]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
+mesh = SubResource("BoxMesh_q3sh1")
+
+[node name="Left" type="MeshInstance3D" parent="." unique_id=896736879]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 5, 0)
+mesh = SubResource("BoxMesh_lsxwm")
+
+[node name="Right" type="MeshInstance3D" parent="." unique_id=434189609]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.5, 5, 0)
+mesh = SubResource("BoxMesh_lsxwm")
+
+[node name="CarDetector" type="Area3D" parent="." unique_id=490707304]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CarDetector" unique_id=1894599791]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.022159576, 4.6733856, 0)
+shape = SubResource("BoxShape3D_xe377")

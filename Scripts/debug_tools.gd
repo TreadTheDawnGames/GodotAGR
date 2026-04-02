@@ -1,9 +1,7 @@
 extends Node3D
 
 @export var track_paths : Array[String] = [
-	"res://Scenes/test_scene.tscn",
-	"",
-	"res://Scenes/Tracks/track2.tscn",
+	"res://Scenes/gym.tscn",
 	"res://Scenes/Tracks/track3.tscn",
 	]
 

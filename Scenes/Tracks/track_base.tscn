@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://ds4iuflvta20r"]
 
-[ext_resource type="Script" uid="uid://dfd6pqrkjtakb" path="res://Scripts/debug_tools.gd" id="1_6d0mv"]
-[ext_resource type="PackedScene" uid="uid://uhlj08qhmfqr" path="res://Scenes/Racers/phyics_car_with_weapons.tscn" id="2_6d0mv"]
+[ext_resource type="Script" uid="uid://dngi8hfhmriim" path="res://Scripts/track_base.gd" id="1_xsmbf"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6d0mv"]
 sky_top_color = Color(0, 0.49896288, 0.6138532, 1)
@@ -14,9 +13,10 @@ background_mode = 2
 sky = SubResource("Sky_qee0n")
 
 [node name="TrackBase" type="Node3D" unique_id=1889599176]
-script = ExtResource("1_6d0mv")
+script = ExtResource("1_xsmbf")
 
-[node name="PhysicsCarWithWeapons" parent="." unique_id=1233134335 instance=ExtResource("2_6d0mv")]
+[node name="Checkpoints" type="Node3D" parent="." unique_id=333613908]
+unique_name_in_owner = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1036012249]
 environment = SubResource("Environment_784mk")

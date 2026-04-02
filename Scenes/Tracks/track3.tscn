@@ -2,11 +2,12 @@
 
 [ext_resource type="PackedScene" uid="uid://ds4iuflvta20r" path="res://Scenes/Tracks/track_base.tscn" id="1_75lro"]
 [ext_resource type="PackedScene" uid="uid://chics8gd3g1u0" path="res://Scenes/Tracks/Meshes/track_3_mesh.tscn" id="2_5ujwb"]
+[ext_resource type="PackedScene" uid="uid://cwc2c3lsm2dkt" path="res://Scenes/Scenery/checkpoint_gate.tscn" id="3_5ujwb"]
 
 [node name="TrackBase" unique_id=1889599176 instance=ExtResource("1_75lro")]
 
-[node name="PhysicsCarWithWeapons" parent="." index="0" unique_id=1233134335]
-speed = 2.0
+[node name="CheckpointGate" parent="Checkpoints" parent_id_path=PackedInt32Array(333613908) index="0" unique_id=313476707 instance=ExtResource("3_5ujwb")]
+transform = Transform3D(-0.056483634, 0, 0.99840355, 0, 1, 0, -0.99840355, 0, -0.056483634, -7.1407914, -9.830684, 2.2006474)
 
 [node name="Track3" parent="." index="1" unique_id=716470887 instance=ExtResource("2_5ujwb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 34.81054, -44.080696)
