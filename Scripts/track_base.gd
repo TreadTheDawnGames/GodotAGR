@@ -17,14 +17,15 @@ func _ready() -> void:
 			gate.sig_car_crossed.connect(_handle_car_crossed)
 
 func _handle_car_crossed(car : CarBuiltInPhysics, gate : CheckpointGate):
-	print("thinging")
 	car_checkpoints.get_or_add(car, [])
+	
 	if not car_checkpoints[car].has(gate):
 		car_checkpoints[car].append(gate)
-	if car_checkpoints[car].all(func(x): return checkpoints.has(x)):
+		
+	if checkpoints.all(func(x): return car_checkpoints[car].has(x) and gate.is_finish_line):
+		print("lap completed: " + str(car_checkpoints))
 		car_laps.get_or_add(car, 0)
 		car_laps[car] += 1
-		car_checkpoints.clear()
-		print("lap completed")
-		pass
+		car_checkpoints[car].clear()
+		
 	pass

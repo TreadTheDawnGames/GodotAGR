@@ -1,0 +1,86 @@
+[gd_scene format=3 uid="uid://di3nkha8wclqf"]
+
+[ext_resource type="Script" uid="uid://c88vc546futow" path="res://Scripts/tools/track_mesh.gd" id="1_5ej4b"]
+[ext_resource type="ArrayMesh" uid="uid://d0goqcociuey3" path="res://Assets/Models/TrackPiece.obj" id="2_s8uv1"]
+[ext_resource type="Texture2D" uid="uid://caf4f2vlfpi01" path="res://Assets/Sprites/Road.png" id="3_2p4yr"]
+[ext_resource type="ArrayMesh" uid="uid://clv5b1tmkskjk" path="res://Assets/Models/TrackWallPiece.obj" id="4_vkd8t"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_lfurd"]
+size = Vector3(25, 13, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pxv2g"]
+albedo_texture = ExtResource("3_2p4yr")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c0eyy"]
+albedo_color = Color(0.26657522, 0.2665752, 0.2665752, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_up2a5"]
+albedo_color = Color(0.26657522, 0.2665752, 0.2665752, 1)
+
+[node name="TrackMeshBase" type="Node3D" unique_id=716470887]
+script = ExtResource("1_5ej4b")
+
+[node name="TrackPath" type="Path3D" parent="." unique_id=1301359839]
+unique_name_in_owner = true
+
+[node name="CheckpointPathFollower" type="PathFollow3D" parent="TrackPath" unique_id=1361727862]
+unique_name_in_owner = true
+transform = Transform3D(-0.027766483, 0, -0.999582, 0, 0.9999647, 0, 0.9995832, 0, -0.027766451, -86.805916, 0, 41.421917)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TrackPath/CheckpointPathFollower" unique_id=482645373]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.665, 0)
+mesh = SubResource("BoxMesh_lfurd")
+
+[node name="Track" type="PathMesh3D" parent="." unique_id=131154570 node_paths=PackedStringArray("path_3d")]
+path_3d = NodePath("../TrackPath")
+collision_mode = 1
+collision_layer = 1
+collision_mask = 1
+mesh = ExtResource("2_s8uv1")
+surface_0/tile_rotation = Vector3(0, 0, 0)
+surface_0/tile_rotation_order = 2
+surface_0/distribution = 0
+surface_0/alignment = 0
+surface_0/warp_along_curve = true
+surface_0/mesh_length_offset = 0.0
+surface_0/sample_cubic = false
+surface_0/tilt = true
+surface_0/offset = Vector2(0, 0)
+surface_0/triangle_count = 0
+material_override = SubResource("StandardMaterial3D_pxv2g")
+
+[node name="PathMesh3D" type="PathMesh3D" parent="." unique_id=1583563819 node_paths=PackedStringArray("path_3d")]
+path_3d = NodePath("../TrackPath")
+collision_mode = 1
+collision_layer = 1
+collision_mask = 1
+mesh = ExtResource("4_vkd8t")
+surface_0/tile_rotation = Vector3(0, 0, 0)
+surface_0/tile_rotation_order = 2
+surface_0/distribution = 0
+surface_0/alignment = 0
+surface_0/warp_along_curve = true
+surface_0/mesh_length_offset = 0.0
+surface_0/sample_cubic = false
+surface_0/tilt = true
+surface_0/offset = Vector2(12.53, 1.5)
+surface_0/triangle_count = 0
+material_override = SubResource("StandardMaterial3D_c0eyy")
+
+[node name="PathMesh3D2" type="PathMesh3D" parent="." unique_id=749818359 node_paths=PackedStringArray("path_3d")]
+path_3d = NodePath("../TrackPath")
+collision_mode = 1
+collision_layer = 1
+collision_mask = 1
+mesh = ExtResource("4_vkd8t")
+surface_0/tile_rotation = Vector3(0, 3.1415927, 0)
+surface_0/tile_rotation_order = 2
+surface_0/distribution = 0
+surface_0/alignment = 0
+surface_0/warp_along_curve = true
+surface_0/mesh_length_offset = 0.0
+surface_0/sample_cubic = false
+surface_0/tilt = true
+surface_0/offset = Vector2(-12.5, 1.5)
+surface_0/triangle_count = 0
+material_override = SubResource("StandardMaterial3D_up2a5")

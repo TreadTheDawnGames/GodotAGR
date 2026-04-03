@@ -1,8 +1,16 @@
 [gd_scene format=3 uid="uid://cwc2c3lsm2dkt"]
 
 [ext_resource type="Script" uid="uid://c8s8y8ax7uuh" path="res://Scenes/Scenery/checkpoint_gate.gd" id="1_lsxwm"]
+[ext_resource type="Texture2D" uid="uid://cx5te5ip4kekm" path="res://Assets/Sprites/Checkers.png" id="2_xe377"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_02yx8"]
+size = Vector3(25, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oone2"]
+albedo_texture = ExtResource("2_xe377")
 
 [sub_resource type="BoxMesh" id="BoxMesh_q3sh1"]
+material = SubResource("StandardMaterial3D_oone2")
 size = Vector3(25, 1, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_lsxwm"]
@@ -14,7 +22,13 @@ size = Vector3(24.46859, 10.360382, 1)
 [node name="CheckpointGate" type="Node3D" unique_id=313476707]
 script = ExtResource("1_lsxwm")
 
-[node name="Top" type="MeshInstance3D" parent="." unique_id=1907551773]
+[node name="Top" type="MeshInstance3D" parent="." unique_id=1988150604]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
+mesh = SubResource("BoxMesh_02yx8")
+
+[node name="TopCheckered" type="MeshInstance3D" parent="." unique_id=1907551773]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
 mesh = SubResource("BoxMesh_q3sh1")
 

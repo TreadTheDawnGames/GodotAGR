@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dfd6pqrkjtakb" path="res://Scripts/debug_tools.gd" id="1_o5me4"]
 [ext_resource type="PackedScene" uid="uid://bbb7v7tdg4mrf" path="res://Scenes/UI/lobby.tscn" id="3_a7bpj"]
-[ext_resource type="PackedScene" uid="uid://bjmu0pqfhbiyy" path="res://Scenes/Tracks/track3.tscn" id="3_h0u5u"]
+[ext_resource type="PackedScene" uid="uid://ddlmk232youfg" path="res://Scenes/Tracks/track_oval.tscn" id="3_h0u5u"]
 
 [node name="SplitScreenRoot" type="Node3D" unique_id=1628531053 node_paths=PackedStringArray("curr_level")]
 script = ExtResource("1_o5me4")
@@ -32,4 +32,5 @@ handle_input_locally = false
 size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
-[node name="TrackBase" parent="Screens/SubViewportContainer/SubViewport" unique_id=1889599176 instance=ExtResource("3_h0u5u")]
+[node name="TrackOval" parent="." unique_id=1889599176 instance=ExtResource("3_h0u5u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.895402, 0, 5.2143917)
