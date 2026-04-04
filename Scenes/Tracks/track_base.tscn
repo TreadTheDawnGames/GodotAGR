@@ -1,7 +1,11 @@
 [gd_scene format=3 uid="uid://ds4iuflvta20r"]
 
-[ext_resource type="Script" uid="uid://dfd6pqrkjtakb" path="res://Scripts/debug_tools.gd" id="1_6d0mv"]
-[ext_resource type="PackedScene" uid="uid://uhlj08qhmfqr" path="res://Scenes/Racers/phyics_car_with_weapons.tscn" id="2_6d0mv"]
+[ext_resource type="Script" uid="uid://dngi8hfhmriim" path="res://Scripts/track_base.gd" id="1_xsmbf"]
+[ext_resource type="Script" uid="uid://po0gln72rnvi" path="res://Scripts/tools/checkpoint_placer.gd" id="2_6d0mv"]
+[ext_resource type="Script" uid="uid://c88vc546futow" path="res://Scripts/tools/track_mesh.gd" id="3_qee0n"]
+[ext_resource type="ArrayMesh" uid="uid://d0goqcociuey3" path="res://Assets/Models/TrackPiece.obj" id="4_xjhta"]
+[ext_resource type="Texture2D" uid="uid://caf4f2vlfpi01" path="res://Assets/Sprites/Road.png" id="5_4g7e1"]
+[ext_resource type="ArrayMesh" uid="uid://clv5b1tmkskjk" path="res://Assets/Models/TrackWallPiece.obj" id="6_6neg1"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6d0mv"]
 sky_top_color = Color(0, 0.49896288, 0.6138532, 1)
@@ -13,10 +17,96 @@ sky_material = SubResource("ProceduralSkyMaterial_6d0mv")
 background_mode = 2
 sky = SubResource("Sky_qee0n")
 
-[node name="TrackBase" type="Node3D" unique_id=1889599176]
-script = ExtResource("1_6d0mv")
+[sub_resource type="BoxMesh" id="BoxMesh_r564w"]
+size = Vector3(25, 13, 1)
 
-[node name="PhysicsCarWithWeapons" parent="." unique_id=1233134335 instance=ExtResource("2_6d0mv")]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_034y1"]
+albedo_texture = ExtResource("5_4g7e1")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wbqn7"]
+albedo_color = Color(0.26657522, 0.2665752, 0.2665752, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pjlew"]
+albedo_color = Color(0.26657522, 0.2665752, 0.2665752, 1)
+
+[node name="TrackBase" type="Node3D" unique_id=1889599176]
+script = ExtResource("1_xsmbf")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1036012249]
 environment = SubResource("Environment_784mk")
+
+[node name="CheckpointPlacer" type="Node3D" parent="." unique_id=636413940]
+script = ExtResource("2_6d0mv")
+start_pad_distance_from_center = null
+start_pad_distance_from_others = null
+
+[node name="Checkpoints" type="Node3D" parent="." unique_id=333613908]
+unique_name_in_owner = true
+
+[node name="StartPads" type="Node3D" parent="." unique_id=1481573928]
+unique_name_in_owner = true
+
+[node name="TrackMesh" type="Node3D" parent="." unique_id=1607988377]
+script = ExtResource("3_qee0n")
+
+[node name="TrackPath" type="Path3D" parent="TrackMesh" unique_id=1373077343]
+unique_name_in_owner = true
+
+[node name="CheckpointPathFollower" type="PathFollow3D" parent="TrackMesh/TrackPath" unique_id=1609718457]
+unique_name_in_owner = true
+transform = Transform3D(-0.027766483, 0, -0.999582, 0, 0.9999647, 0, 0.9995832, 0, -0.027766451, -86.805916, 0, 41.421917)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TrackMesh/TrackPath/CheckpointPathFollower" unique_id=1328005401]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.665, 0)
+mesh = SubResource("BoxMesh_r564w")
+
+[node name="Track" type="PathMesh3D" parent="TrackMesh" unique_id=117510272]
+collision_mode = 1
+collision_layer = 1
+collision_mask = 1
+mesh = ExtResource("4_xjhta")
+surface_0/tile_rotation = Vector3(0, 0, 0)
+surface_0/tile_rotation_order = 2
+surface_0/distribution = 0
+surface_0/alignment = 0
+surface_0/warp_along_curve = true
+surface_0/mesh_length_offset = 0.0
+surface_0/sample_cubic = false
+surface_0/tilt = true
+surface_0/offset = Vector2(0, 0)
+surface_0/triangle_count = 0
+material_override = SubResource("StandardMaterial3D_034y1")
+
+[node name="PathMesh3D" type="PathMesh3D" parent="TrackMesh" unique_id=1476832966]
+collision_mode = 1
+collision_layer = 1
+collision_mask = 1
+mesh = ExtResource("6_6neg1")
+surface_0/tile_rotation = Vector3(0, 0, 0)
+surface_0/tile_rotation_order = 2
+surface_0/distribution = 0
+surface_0/alignment = 0
+surface_0/warp_along_curve = true
+surface_0/mesh_length_offset = 0.0
+surface_0/sample_cubic = false
+surface_0/tilt = true
+surface_0/offset = Vector2(12.53, 1.5)
+surface_0/triangle_count = 0
+material_override = SubResource("StandardMaterial3D_wbqn7")
+
+[node name="PathMesh3D2" type="PathMesh3D" parent="TrackMesh" unique_id=1028861537]
+collision_mode = 1
+collision_layer = 1
+collision_mask = 1
+mesh = ExtResource("6_6neg1")
+surface_0/tile_rotation = Vector3(0, 3.1415927, 0)
+surface_0/tile_rotation_order = 2
+surface_0/distribution = 0
+surface_0/alignment = 0
+surface_0/warp_along_curve = true
+surface_0/mesh_length_offset = 0.0
+surface_0/sample_cubic = false
+surface_0/tilt = true
+surface_0/offset = Vector2(-12.5, 1.5)
+surface_0/triangle_count = 0
+material_override = SubResource("StandardMaterial3D_pjlew")

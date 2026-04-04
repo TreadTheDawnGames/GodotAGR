@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://bq4gjfnpq4wha"]
+
+[ext_resource type="PackedScene" uid="uid://di3nkha8wclqf" path="res://Scenes/Tracks/Meshes/track_mesh_base.tscn" id="1_k2aik"]
+
+[sub_resource type="Curve3D" id="Curve3D_enu7i"]
+closed = true
+_data = {
+"points": PackedVector3Array(-12.096695, 0, -0.33602142, 12.096695, 0, 0.33602142, -86.805916, 0, 41.421917, -14.448853, 0, 0.67203903, 14.448853, 0, -0.67203903, 82.88378, 0, 39.069786, 6.04834, 0, 57.123253, -6.04834, 0, -57.123253, 146.05539, 0, -14.693277, 0, 0, 0, 0, 0, 0, 77.17144, 0, -67.11227, 0, 0, 0, 0, 0, 0, -85.12582, 0, -62.07198, 0, 0, -53.091022, 0, 0, 53.091022, -135.8647, 0, -8.644938),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0)
+}
+point_count = 6
+
+[node name="TrackOval" unique_id=716470887 instance=ExtResource("1_k2aik")]
+
+[node name="TrackPath" parent="." index="0" unique_id=1301359839]
+curve = SubResource("Curve3D_enu7i")
+
+[node name="Track" parent="." index="1" unique_id=131154570]
+surface_0/triangle_count = 2268
+
+[node name="PathMesh3D" parent="." index="2" unique_id=1583563819]
+surface_0/triangle_count = 312
+
+[node name="PathMesh3D2" parent="." index="3" unique_id=749818359]
+surface_0/triangle_count = 312

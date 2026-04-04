@@ -38,6 +38,10 @@ script = ExtResource("4_jn7t0")
 hurtbox = NodePath("../Area3D")
 
 [node name="InputManger_Player" parent="." index="4" unique_id=833981559]
+[node name="TrackSnapper" parent="." index="1" unique_id=1984121014]
+speed = 2.0
+
+[node name="InputManger_Player" parent="." index="2" unique_id=833981559]
 script = ExtResource("3_se88i")
 
 [node name="WeaponsManager" type="Node3D" parent="VisualPartOfCar/craft_racer2" parent_id_path=PackedInt32Array(400414786) index="1" unique_id=1873970340]
