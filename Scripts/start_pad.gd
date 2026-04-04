@@ -9,5 +9,5 @@ func fill_pad(car : CarBuiltInPhysics):
 		spawn_position = get_node("%SpawnPosition")
 
 	car.global_position = spawn_position.global_position
-	car.rotation = spawn_position.rotation
+	car.global_rotation = spawn_position.global_rotation
 	filled = true

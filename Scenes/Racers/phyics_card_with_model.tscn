@@ -20,6 +20,7 @@ script = ExtResource("1_or2hj")
 unique_name_in_owner = true
 script = ExtResource("2_n0o01")
 use_acceleration = false
+gravity = 1.0
 
 [node name="InputManger_Player" type="Node" parent="." unique_id=833981559]
 unique_name_in_owner = true
@@ -79,12 +80,12 @@ strafe_visual_speed = 25.0
 
 [node name="craft_racer2" parent="VisualPartOfCar" unique_id=400414786 instance=ExtResource("3_mhdb0")]
 
-[node name="SpringArm3D" type="SpringArm3D" parent="VisualPartOfCar" unique_id=855792824]
-transform = Transform3D(-1, 7.986469e-08, 3.555805e-08, 0, 0.40673667, -0.9135456, -8.742278e-08, -0.9135456, -0.40673667, 0, 0, 0)
-spring_length = 13.745
+[node name="Marker3D" type="Marker3D" parent="VisualPartOfCar" unique_id=421143750]
+transform = Transform3D(-1, 1.4913682e-07, 2.3620938e-08, 0, 0.15643443, -0.9876885, -1.509958e-07, -0.9876885, -0.15643443, 0, -12.557, -5.591)
 
-[node name="Marker3D" type="Marker3D" parent="VisualPartOfCar/SpringArm3D" unique_id=421143750]
-transform = Transform3D(1, 0, 0, 0, 0.9659258, -0.25881904, 0, 0.25881904, 0.9659258, 0, 0, 0)
+[node name="SpringArm3D" type="SpringArm3D" parent="VisualPartOfCar" unique_id=855792824]
+transform = Transform3D(-1, 1.3794156e-07, 6.141553e-08, 0, 0.40673667, -0.9135456, -1.509958e-07, -0.9135456, -0.40673667, 0, 0, 0)
+spring_length = 13.745
 
 [node name="Camera3D" type="Camera3D" parent="VisualPartOfCar" unique_id=411333095]
 transform = Transform3D(-1, 7.986471e-08, 3.5558045e-08, 8.74228e-08, 0.9135455, 0.40673664, 1.3152316e-14, 0.40673664, -0.9135455, 1.7053026e-13, 5.49611, -12.3413105)
@@ -92,4 +93,4 @@ top_level = true
 script = ExtResource("5_3jyv5")
 lerp_speed = Vector3(0.8, 0.5, 0.8)
 ang_lerp_speed = Vector3(1, 1, 1)
-target_node_path = NodePath("../SpringArm3D/Marker3D")
+target_node_path = NodePath("../Marker3D")

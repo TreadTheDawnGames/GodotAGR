@@ -18,4 +18,4 @@ mesh = SubResource("BoxMesh_lgd4j")
 
 [node name="SpawnPosition" type="Marker3D" parent="." unique_id=132230353]
 unique_name_in_owner = true
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 3.2287133, 0)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.9, 0)

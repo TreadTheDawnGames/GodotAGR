@@ -54,3 +54,7 @@ func fill_next_pad(car : CarBuiltInPhysics):
 	var unfilled_pads : Array[StartPad] = start_pads.filter(func(a : StartPad): return not a.filled)
 	if unfilled_pads.size()>0:
 		unfilled_pads[0].fill_pad(car)
+
+func unfill_pads():
+	for pad in start_pads:
+		pad.filled = false

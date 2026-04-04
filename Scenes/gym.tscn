@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://cjc2ikrefvvdq" path="res://addons/zylann.hterrain/hterrain.gd" id="2_50ct6"]
 [ext_resource type="Resource" path="res://Assets/Terrain/data.hterrain" id="3_ak5v8"]
 [ext_resource type="Script" uid="uid://cln80f4dwv35i" path="res://addons/zylann.hterrain/hterrain_texture_set.gd" id="3_hb2xm"]
-[ext_resource type="PackedScene" path="res://Scenes/Scenery/boost_pad.tscn" id="6_c256x"]
+[ext_resource type="PackedScene" uid="uid://6d4n4to0j55y" path="res://Scenes/Scenery/boost_pad.tscn" id="6_c256x"]
 [ext_resource type="PackedScene" uid="uid://ct2cfmi4gtmcu" path="res://Scenes/Scenery/targetable_dummy.tscn" id="6_x033f"]
 [ext_resource type="PackedScene" uid="uid://blqmatuyy1tev" path="res://Scenes/Scenery/start_pad.tscn" id="7_u7x6n"]
 
@@ -151,7 +151,7 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -269.409, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1511224235]
-transform = Transform3D(1000, 0, 0, 0, 1, 0, 0, 0, 50, -433.70868, -9.360535, 0)
+transform = Transform3D(2000, 0, 0, 0, 1, 0, 0, 0, 50, -960.315, -9.361, 0)
 shape = SubResource("BoxShape3D_stjpo")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D" unique_id=1665306598]

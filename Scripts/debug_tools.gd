@@ -22,9 +22,13 @@ var viewport_associations : Dictionary[int, SubViewportContainer] = {}
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("Debug-Reload"):
-		get_tree().reload_current_scene();
+		loaded_track.unfill_pads()
+		for index : int in viewport_associations.keys():
+			var car : CarBuiltInPhysics = PlayerManager.get_player_data(index, &"car")
+			if car:
+				car.velocity = Vector3.ZERO
+				loaded_track.fill_next_pad(car)
 		
-	pass
 	
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -53,7 +57,6 @@ func _unhandled_input(event: InputEvent) -> void:
 				var car : CarBuiltInPhysics = PlayerManager.get_player_data(index, &"car")
 				if car:
 					loaded_track.fill_next_pad(car)
-			print("thinging")
 			#if get_tree().change_scene_to_file() != OK:
 				#printerr("Unable to load scene: \"" + (track_paths[parsed_num] if track_paths[parsed_num] != "" else "[Empty Path]")  + "\"")
 			#else:
