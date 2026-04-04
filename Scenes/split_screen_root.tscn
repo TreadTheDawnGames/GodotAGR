@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" uid="uid://dfd6pqrkjtakb" path="res://Scripts/debug_tools.gd" id="1_o5me4"]
 [ext_resource type="PackedScene" uid="uid://bbb7v7tdg4mrf" path="res://Scenes/UI/lobby.tscn" id="3_a7bpj"]
-[ext_resource type="PackedScene" uid="uid://ddlmk232youfg" path="res://Scenes/Tracks/track_oval.tscn" id="3_h0u5u"]
+[ext_resource type="PackedScene" uid="uid://csn848dmidhmf" path="res://Scenes/Tracks/track_z.tscn" id="3_h0u5u"]
 
 [node name="SplitScreenRoot" type="Node3D" unique_id=1628531053 node_paths=PackedStringArray("first_player_viewport", "loaded_track")]
 script = ExtResource("1_o5me4")
 first_player_viewport = NodePath("Screens/SubViewportContainer/FirstPlayerViewport")
-loaded_track = NodePath("Screens/SubViewportContainer/FirstPlayerViewport/TrackOval")
+loaded_track = NodePath("Screens/SubViewportContainer/FirstPlayerViewport/TrackZ")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=53416123]
 
@@ -34,5 +34,6 @@ handle_input_locally = false
 size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
-[node name="TrackOval" parent="Screens/SubViewportContainer/FirstPlayerViewport" unique_id=1889599176 instance=ExtResource("3_h0u5u")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.895402, 0, 5.2143917)
+[node name="TrackZ" parent="Screens/SubViewportContainer/FirstPlayerViewport" unique_id=1889599176 node_paths=PackedStringArray("checkpoints", "start_pads") instance=ExtResource("3_h0u5u")]
+checkpoints = []
+start_pads = []

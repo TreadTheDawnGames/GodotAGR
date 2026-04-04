@@ -18,10 +18,10 @@ var car_laps : Dictionary[CarBuiltInPhysics, int] = {}
 func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
-	if checkpoints.size() == 0:
+	if checkpoints.size() == 0 and FLDR_checkpoints:
 		for gate : CheckpointGate in FLDR_checkpoints.find_children("*", "CheckpointGate"):
 			checkpoints.append(gate)
-	if start_pads.size() == 0:
+	if start_pads.size() == 0 and FLDR_start_pads:
 		for gate : StartPad in FLDR_start_pads.find_children("*", "StartPad"):
 			start_pads.append(gate)
 	for checkpoint : CheckpointGate in checkpoints:

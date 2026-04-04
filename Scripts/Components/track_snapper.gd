@@ -26,12 +26,13 @@ var was_y_vel : float = 0
 @export var friction : float = 0.125/10
 @export var air_friction : float = 0.125/15
 
-@export var ground_dist : float = 1 :
-	set(new_val):
-		ground_dist = new_val
-		for raycast : RayCast3D in raycasts:
-			raycast.target_position.y = -ground_dist
-
+@export var ground_dist : float = 1 
+#:
+	#set(new_val):
+		#ground_dist = new_val
+		#for raycast : RayCast3D in raycasts:
+			#raycast.target_position.y = -ground_dist
+#
 
 @export var adjustable_ground_distance : bool = false
 @export var max_elevation : float = 3
@@ -41,8 +42,8 @@ var curr_boost_power : float = 0.0
 
 func assign_raycasts(rays : Array[RayCast3D]):
 	raycasts = rays
-	for ray in raycasts:
-		ray.target_position.y = -ground_dist
+	#for ray in raycasts:
+		#ray.target_position.y = -ground_dist
 
 
 # https://kidscancode.org/godot_recipes/3.x/3d/3d_align_surface/

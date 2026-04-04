@@ -2,7 +2,9 @@ extends Node3D
 
 @export var track_paths : Array[String] = [
 	"res://Scenes/gym.tscn",
+	"res://Scenes/Tracks/track_oval.tscn",
 	"res://Scenes/Tracks/track3.tscn",
+	"res://Scenes/Tracks/track_z.tscn",
 	]
 
 @export var CAR : PackedScene = preload("uid://uhlj08qhmfqr")
@@ -16,7 +18,6 @@ var loading : bool = false
 
 @onready var curr_screens: GridContainer = %Screens
 var viewport_associations : Dictionary[int, SubViewportContainer] = {}
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -37,16 +38,26 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event is not InputEventKey or loading: return
+	if event is not InputEventKey: return
 	
 	if event.as_text().begins_with("Kp "):
-		loading = true
 		var parsed_num : int = int(event.as_text()[-1])
 		if track_paths.size() >= parsed_num+1:
-			if get_tree().change_scene_to_file(track_paths[parsed_num]) != OK:
-				printerr("Unable to load scene: \"" + (track_paths[parsed_num] if track_paths[parsed_num] != "" else "[Empty Path]")  + "\"")
-			else:
-				print("Loading track: " + track_paths[parsed_num])
+			loaded_track.queue_free()
+			
+			var new_track_scene : PackedScene = load(track_paths[parsed_num])
+			var new_track : Track = new_track_scene.instantiate()
+			first_player_viewport.add_child(new_track)
+			loaded_track = new_track
+			for index : int in viewport_associations.keys():
+				var car : CarBuiltInPhysics = PlayerManager.get_player_data(index, &"car")
+				if car:
+					loaded_track.fill_next_pad(car)
+			print("thinging")
+			#if get_tree().change_scene_to_file() != OK:
+				#printerr("Unable to load scene: \"" + (track_paths[parsed_num] if track_paths[parsed_num] != "" else "[Empty Path]")  + "\"")
+			#else:
+				#print("Loading track: " + track_paths[parsed_num])
 	pass
 
 func _spawn_ship(player_index : int):
@@ -61,6 +72,7 @@ func _spawn_ship(player_index : int):
 	else:
 		car_viewport = _add_viewport(car)
 	loaded_track.fill_next_pad(car)
+	PlayerManager.set_player_data(player_index, &"car", car)
 	
 	viewport_associations.get_or_add(player_index, car_viewport)
 	

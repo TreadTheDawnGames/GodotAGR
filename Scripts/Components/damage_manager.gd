@@ -17,7 +17,6 @@ var curr_hitpoints : float = 50.0:
 			curr_damage_state = new_damage_state
 			sig_next_damage_state.emit(curr_damage_state)
 		
-		print("hitpoints: " + str(new_val) + "curr state: " + str(DamageState.keys()[curr_damage_state]))
 		curr_hitpoints = new_val
 		return curr_hitpoints
 
@@ -31,9 +30,15 @@ signal sig_next_damage_state(damage_state : DamageState)
 func _ready():
 	assert(hurtbox != null, "Hurtbox is not set. DamageManager will not work.")
 	hurtbox.area_entered.connect(_projectile_detected)
-	pass
+	hurtbox.body_entered.connect(func(n): 
+		if n is StaticBody3D:
+			take_damage(get_parent().velocity.length()*0.1))
+	
+func _physics_process(_delta: float) -> void:
+	if hurtbox.get_overlapping_bodies().filter(func(n): return n is StaticBody3D).size() > 0:
+		take_damage(get_parent().velocity.length() * 0.001)
+		pass
 
-# 
 func take_damage(amount : float):
 	curr_hitpoints -= amount
 	sig_damaged.emit(curr_damage_state, curr_hitpoints)

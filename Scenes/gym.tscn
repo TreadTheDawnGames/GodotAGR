@@ -1,11 +1,12 @@
 [gd_scene format=3 uid="uid://fw7eu7xwc1qq"]
 
-[ext_resource type="Script" uid="uid://dfd6pqrkjtakb" path="res://Scripts/debug_tools.gd" id="1_3dogw"]
+[ext_resource type="Script" uid="uid://dngi8hfhmriim" path="res://Scripts/track_base.gd" id="1_3c3f4"]
 [ext_resource type="Script" uid="uid://cjc2ikrefvvdq" path="res://addons/zylann.hterrain/hterrain.gd" id="2_50ct6"]
 [ext_resource type="Resource" path="res://Assets/Terrain/data.hterrain" id="3_ak5v8"]
 [ext_resource type="Script" uid="uid://cln80f4dwv35i" path="res://addons/zylann.hterrain/hterrain_texture_set.gd" id="3_hb2xm"]
-[ext_resource type="PackedScene" uid="uid://6d4n4to0j55y" path="res://Scenes/Scenery/boost_pad.tscn" id="6_c256x"]
+[ext_resource type="PackedScene" path="res://Scenes/Scenery/boost_pad.tscn" id="6_c256x"]
 [ext_resource type="PackedScene" uid="uid://ct2cfmi4gtmcu" path="res://Scenes/Scenery/targetable_dummy.tscn" id="6_x033f"]
+[ext_resource type="PackedScene" uid="uid://blqmatuyy1tev" path="res://Scenes/Scenery/start_pad.tscn" id="7_u7x6n"]
 
 [sub_resource type="Resource" id="Resource_ak5v8"]
 script = ExtResource("3_hb2xm")
@@ -52,9 +53,9 @@ _data = {
 
 [sub_resource type="BoxMesh" id="BoxMesh_c256x"]
 
-[node name="Gym" type="Node3D" unique_id=1771197406 node_paths=PackedStringArray("spawn_position")]
-script = ExtResource("1_3dogw")
-spawn_position = NodePath("HTerrain/SpawnPosition")
+[node name="Gym" type="Node3D" unique_id=1771197406 node_paths=PackedStringArray("start_pads")]
+script = ExtResource("1_3c3f4")
+start_pads = [NodePath("StartPad")]
 
 [node name="HTerrain" type="Node3D" parent="." unique_id=1408702683]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -250, -30, -200)
@@ -167,3 +168,6 @@ boost_power = 2.5
 [node name="BoostPad" parent="." unique_id=1311693383 instance=ExtResource("6_c256x")]
 transform = Transform3D(0.15671024, 0, -0.9876446, 0, 1, 0, 0.9876446, 0, 0.15671024, -269.56308, -8.767702, 1.3440523)
 boost_power = 2.5
+
+[node name="StartPad" parent="." unique_id=1397069956 instance=ExtResource("7_u7x6n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8599172, -6.0391865, 0)

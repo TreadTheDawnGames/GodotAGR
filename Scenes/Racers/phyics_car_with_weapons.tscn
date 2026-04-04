@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://da0ewjkyagh86" path="res://Scripts/Components/damage_manager.gd" id="4_jn7t0"]
 [ext_resource type="PackedScene" uid="uid://cmwcd7bds5t4q" path="res://Scenes/Modules/Weapons/weapon_doubleshot.tscn" id="5_wwejg"]
 [ext_resource type="PackedScene" uid="uid://dpjyk5nk0vgeb" path="res://Scenes/Modules/Weapons/Projectiles/projectile_track_snap.tscn" id="7_qw4xn"]
-[ext_resource type="Script" uid="uid://02nuflff8ocj" path="res://Scripts/Components/ship_hud.gd" id="10_c0tx4"]
+[ext_resource type="Script" path="res://Scripts/Components/ship_hud.gd" id="10_c0tx4"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jn7t0"]
 radius = 0.55
@@ -23,6 +23,8 @@ hitpoints = 50.0
 c_input_manger = NodePath("InputManger_Player")
 
 [node name="Area3D" type="Area3D" parent="." index="0" unique_id=864756974]
+collision_layer = 0
+collision_mask = 7
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Area3D" index="0" unique_id=389225530]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
@@ -37,11 +39,10 @@ unique_name_in_owner = true
 script = ExtResource("4_jn7t0")
 hurtbox = NodePath("../Area3D")
 
-[node name="InputManger_Player" parent="." index="4" unique_id=833981559]
-[node name="TrackSnapper" parent="." index="1" unique_id=1984121014]
+[node name="TrackSnapper" parent="." index="3" unique_id=1984121014]
 speed = 2.0
 
-[node name="InputManger_Player" parent="." index="2" unique_id=833981559]
+[node name="InputManger_Player" parent="." index="4" unique_id=833981559]
 script = ExtResource("3_se88i")
 
 [node name="WeaponsManager" type="Node3D" parent="VisualPartOfCar/craft_racer2" parent_id_path=PackedInt32Array(400414786) index="1" unique_id=1873970340]
