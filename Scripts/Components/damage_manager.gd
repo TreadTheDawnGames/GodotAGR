@@ -7,6 +7,12 @@ class_name DamageManager
 ## The hurtbox this manager uses to determine whether it was hit
 @export var hurtbox : Area3D
 
+## The amount of time (in seconds) you must not take damage in order to start healing
+@export var regen_time : float = 5.0
+## How fast your health regenerates.
+@export var regen_rate : float = 0.2
+var regen_timer : Timer
+
 ## The number of hitpoints the damage manager currently has
 var curr_hitpoints : float = 50.0:
 	set(new_val):
@@ -27,21 +33,36 @@ var curr_damage_state : DamageState = DamageState.FULL
 signal sig_damaged(damage_state : DamageState, hitpoints : float)
 signal sig_next_damage_state(damage_state : DamageState)
 
+
 func _ready():
 	assert(hurtbox != null, "Hurtbox is not set. DamageManager will not work.")
 	hurtbox.area_entered.connect(_projectile_detected)
 	hurtbox.body_entered.connect(func(n): 
 		if n is StaticBody3D:
 			take_damage(get_parent().velocity.length()*0.1))
+	regen_timer = Timer.new()
+	add_child(regen_timer)
+	regen_timer.one_shot = true
+	regen_timer.wait_time = regen_time
 	
 func _physics_process(_delta: float) -> void:
 	if hurtbox.get_overlapping_bodies().filter(func(n): return n is StaticBody3D).size() > 0:
 		take_damage(get_parent().velocity.length() * 0.001)
 		pass
+	else:
+		if curr_hitpoints < max_hitpoints and regen_timer.time_left == 0:
+			heal_damage(1*regen_rate)
 
 func take_damage(amount : float):
-	curr_hitpoints -= amount
+	curr_hitpoints = clamp(curr_hitpoints - amount, 0.0, max_hitpoints)
 	sig_damaged.emit(curr_damage_state, curr_hitpoints)
+	regen_timer.wait_time = regen_time
+	regen_timer.start()
+
+func heal_damage(amount : float):
+	curr_hitpoints = clamp(curr_hitpoints + amount, 0.0, max_hitpoints)
+	sig_damaged.emit(curr_damage_state, curr_hitpoints)
+
 
 func set_hitpoints(amount : float):
 	curr_hitpoints = amount
