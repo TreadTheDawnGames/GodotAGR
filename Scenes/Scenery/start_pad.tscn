@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://blqmatuyy1tev"]
+
+[ext_resource type="Script" uid="uid://7fiumamt12ku" path="res://Scripts/start_pad.gd" id="1_jr5jv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jr5jv"]
+albedo_color = Color(0, 1, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_lgd4j"]
+material = SubResource("StandardMaterial3D_jr5jv")
+size = Vector3(2, 0.2, 4)
+
+[node name="StartPad" type="Node3D" unique_id=1397069956]
+script = ExtResource("1_jr5jv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=931223900]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_lgd4j")
+
+[node name="SpawnPosition" type="Marker3D" parent="." unique_id=132230353]
+unique_name_in_owner = true
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 3.2287133, 0)

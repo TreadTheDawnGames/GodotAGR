@@ -7,7 +7,8 @@ extends Node3D
 
 @export var CAR : PackedScene = preload("uid://uhlj08qhmfqr")
 
-@export var curr_level : Node = self
+@export var first_player_viewport : Node
+@export var loaded_track : Track
 
 @export var spawn_position : Marker3D
 
@@ -56,9 +57,11 @@ func _spawn_ship(player_index : int):
 	car.ready_for_spawn(player_index)
 	var car_viewport : SubViewportContainer = curr_screens.get_child(0)
 	if player_index == 0:
-		curr_level.add_child(car)
+		first_player_viewport.add_child(car)
 	else:
 		car_viewport = _add_viewport(car)
+	loaded_track.fill_next_pad(car)
+	
 	viewport_associations.get_or_add(player_index, car_viewport)
 	
 	pass
