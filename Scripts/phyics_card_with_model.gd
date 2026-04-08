@@ -4,7 +4,7 @@ class_name CarBuiltInPhysics
 
 @export var c_input_manger: InputManager
 @onready var c_track_snapper: TrackSnapper = %TrackSnapper
-
+@onready var c_track_evenet_signaller: TrackEventSignaler = %TrackEvenetSignaller
 
 var player_index : int = 0
 

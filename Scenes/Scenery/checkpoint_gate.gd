@@ -10,6 +10,9 @@ signal sig_car_crossed(car : CarBuiltInPhysics, gate : CheckpointGate)
 
 @onready var car_detector: Area3D = %CarDetector
 
+@export var checkpoint_index : int = 0
+var checkpoint_position_on_track : float = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	top.visible = not is_finish_line

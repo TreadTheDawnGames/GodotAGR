@@ -2,7 +2,7 @@
 extends Node3D
 class_name Track
 
-signal sig_lap_completed(car:CarBuiltInPhysics, lap_number:int) 
+#signal sig_lap_completed(car:CarBuiltInPhysics, lap_number:int) 
 
 @onready var FLDR_checkpoints: Node3D = %Checkpoints
 @onready var FLDR_start_pads: Node3D = %StartPads
@@ -47,7 +47,8 @@ func _handle_car_crossed(car : CarBuiltInPhysics, gate : CheckpointGate):
 		car_laps.get_or_add(car, 0)
 		car_laps[car] += 1
 		car_checkpoints[car].clear()
-		sig_lap_completed.emit(car, car_laps[car])
+		#sig_lap_completed.emit(car, car_laps[car])
+		car.c_lap_manager.update_laps(car_laps[car])
 	pass
 
 func fill_next_pad(car : CarBuiltInPhysics):

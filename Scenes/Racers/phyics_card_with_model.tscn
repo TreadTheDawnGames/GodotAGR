@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bny7nn3jaal31" path="res://Scripts/phyics_card_with_model.gd" id="1_or2hj"]
 [ext_resource type="Script" uid="uid://ckvro8h27plew" path="res://Scripts/visual_part_of_car.gd" id="2_50kln"]
+[ext_resource type="Script" uid="uid://d0hn7olrgjdax" path="res://Scripts/Components/lap_manager.gd" id="2_70j1f"]
 [ext_resource type="Script" uid="uid://bvu5mirjj4s8c" path="res://Scripts/Components/InputManagers/input_manager.gd" id="2_302mq"]
 [ext_resource type="Script" uid="uid://tsm81n5fkwr7" path="res://Scripts/Components/track_snapper.gd" id="2_n0o01"]
 [ext_resource type="PackedScene" uid="uid://d02oipvdp3d7u" path="res://Scenes/Tracks/racer1.tscn" id="3_mhdb0"]
@@ -15,6 +16,10 @@
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_or2hj")
+
+[node name="TrackEvenetSignaller" type="Node" parent="." unique_id=1244202565]
+unique_name_in_owner = true
+script = ExtResource("2_70j1f")
 
 [node name="TrackSnapper" type="Node" parent="." unique_id=1984121014]
 unique_name_in_owner = true
