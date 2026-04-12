@@ -15,6 +15,9 @@
 radius = 0.55
 height = 2.05
 
+[sub_resource type="LabelSettings" id="LabelSettings_jn7t0"]
+font_size = 32
+
 [node name="PhysicsCarWithWeapons" unique_id=1233134335 node_paths=PackedStringArray("c_weapons_manager", "c_input_manger") instance=ExtResource("1_mirks")]
 collision_layer = 8
 script = ExtResource("2_ynbrd")
@@ -39,24 +42,11 @@ unique_name_in_owner = true
 script = ExtResource("4_jn7t0")
 hurtbox = NodePath("../Area3D")
 
-[node name="TrackSnapper" parent="." index="3" unique_id=1984121014]
+[node name="TrackSnapper" parent="." index="4" unique_id=1984121014]
 speed = 2.0
 
-[node name="InputManger_Player" parent="." index="4" unique_id=833981559]
+[node name="InputManger_Player" parent="." index="5" unique_id=833981559]
 script = ExtResource("3_se88i")
-
-[node name="WeaponsManager" type="Node3D" parent="VisualPartOfCar/craft_racer2" parent_id_path=PackedInt32Array(400414786) index="1" unique_id=1873970340]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.900529, -0.18390921)
-script = ExtResource("3_grbwd")
-
-[node name="Weapon_DoubleShot" parent="VisualPartOfCar/craft_racer2/WeaponsManager" index="0" unique_id=693924245 instance=ExtResource("5_wwejg")]
-projectile = ExtResource("7_qw4xn")
-cooldown = 0.1
-amount = 1
-spread = 0.0
-
-[node name="BaseWeapon" parent="VisualPartOfCar/craft_racer2/WeaponsManager" index="1" unique_id=2010869066 instance=ExtResource("4_grbwd")]
 
 [node name="ShipHud" type="Control" parent="." index="12" unique_id=1033596883]
 layout_mode = 3
@@ -85,9 +75,56 @@ text = "Speed: 0000"
 
 [node name="HitpointBar" type="ProgressBar" parent="ShipHud" index="1" unique_id=1113414884]
 unique_name_in_owner = true
-layout_mode = 0
-offset_left = 209.0
-offset_top = 570.0
-offset_right = 442.0
-offset_bottom = 597.0
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 216.0
+offset_top = -75.0
+offset_right = 449.0
+offset_bottom = -48.0
+grow_vertical = 0
 show_percentage = false
+
+[node name="LapCountLabel" type="Label" parent="ShipHud" index="2" unique_id=988446381]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -131.0
+offset_top = -69.0
+offset_right = -24.0
+offset_bottom = -24.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Laps: 0"
+label_settings = SubResource("LabelSettings_jn7t0")
+
+[node name="LapTimeLabel" type="Label" parent="ShipHud" index="3" unique_id=1445340145]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -121.0
+offset_top = 64.0
+offset_right = 121.0
+offset_bottom = 87.0
+grow_horizontal = 2
+text = "This is placeholder for lap time."
+
+[node name="WeaponsManager" type="Node3D" parent="VisualPartOfCar/craft_racer2" parent_id_path=PackedInt32Array(400414786) index="1" unique_id=1873970340]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.900529, -0.18390921)
+script = ExtResource("3_grbwd")
+
+[node name="Weapon_DoubleShot" parent="VisualPartOfCar/craft_racer2/WeaponsManager" index="0" unique_id=693924245 instance=ExtResource("5_wwejg")]
+projectile = ExtResource("7_qw4xn")
+cooldown = 0.1
+amount = 1
+spread = 0.0
+
+[node name="BaseWeapon" parent="VisualPartOfCar/craft_racer2/WeaponsManager" index="1" unique_id=2010869066 instance=ExtResource("4_grbwd")]

@@ -41,6 +41,7 @@ func _handle_car_crossed(car : CarBuiltInPhysics, gate : CheckpointGate):
 	car_checkpoints.get_or_add(car, [])
 	if not car_checkpoints[car].has(gate):
 		car_checkpoints[car].append(gate)
+		car.c_track_event_signaller.checkpoint_reached(gate.checkpoint_index, gate.is_key_checkpoint)
 		
 	if checkpoints.all(func(x): return car_checkpoints[car].has(x) and gate.is_finish_line):
 		print("lap completed: " + str(car_checkpoints))
@@ -48,7 +49,7 @@ func _handle_car_crossed(car : CarBuiltInPhysics, gate : CheckpointGate):
 		car_laps[car] += 1
 		car_checkpoints[car].clear()
 		#sig_lap_completed.emit(car, car_laps[car])
-		car.c_lap_manager.update_laps(car_laps[car])
+		car.c_track_event_signaller.update_laps(car_laps[car])
 	pass
 
 func fill_next_pad(car : CarBuiltInPhysics):

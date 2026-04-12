@@ -12,6 +12,7 @@ signal sig_car_crossed(car : CarBuiltInPhysics, gate : CheckpointGate)
 
 @export var checkpoint_index : int = 0
 var checkpoint_position_on_track : float = 0
+@export var is_key_checkpoint : bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

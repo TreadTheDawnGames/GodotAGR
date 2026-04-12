@@ -1,16 +1,73 @@
 [gd_scene format=3 uid="uid://ddlmk232youfg"]
 
 [ext_resource type="PackedScene" uid="uid://ds4iuflvta20r" path="res://Scenes/Tracks/track_base.tscn" id="1_ekwm8"]
+[ext_resource type="PackedScene" uid="uid://cwc2c3lsm2dkt" path="res://Scenes/Scenery/checkpoint_gate.tscn" id="2_ekwm8"]
+[ext_resource type="Script" uid="uid://c8s8y8ax7uuh" path="res://Scenes/Scenery/checkpoint_gate.gd" id="3_6qdlf"]
+[ext_resource type="PackedScene" uid="uid://blqmatuyy1tev" path="res://Scenes/Scenery/start_pad.tscn" id="4_l4j5q"]
+[ext_resource type="Script" uid="uid://7fiumamt12ku" path="res://Scripts/start_pad.gd" id="5_m3f57"]
 
 [sub_resource type="Curve3D" id="Curve3D_iqwtb"]
 closed = true
 _data = {
 "points": PackedVector3Array(-33.691048, 0.8433838, -1.697403, 33.691048, -0.8433838, 1.697403, -114.47783, 16.273998, 65.041405, 0, 0, 0, 0, 0, 0, 14.72419, 16.273998, 63.892944, 0, 0, 0, 0, 0, 0, 138.75809, 16.273998, 65.61564, -47.76123, -0.8796978, 4.5776367e-05, 47.76123, 0.8796978, -4.5776367e-05, 267.9601, 16.273998, 66.18987, 22.602234, -1.6605797, 68.90932, -22.602234, 1.6605797, -68.90932, 368.75656, 22.220562, 3.2629318, 47.447083, -0.013784409, 6.866455e-05, -47.447083, 0.013784409, -6.866455e-05, 268.53433, 16.273998, -64.73482, 0, 0, 0, 0, 0, 0, 138.18387, 16.273998, -64.16059, 0, 0, 0, 0, 0, 0, 10.130352, 16.273998, -64.73482, 33.43553, 0, -1.0592575, -33.43553, 0, 1.0592575, -117.34899, 16.273998, -65.30905, -1.3400269, -0.29154968, -27.023422, 1.3400269, 0.29154968, 27.023422, -183.07382, 16.273998, -10.0881195),
-"tilts": PackedFloat32Array(0, 0, 0, 0, -1.5707964, 0, 0, 0, 0, -1.5707964)
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 }
 point_count = 10
 
 [node name="TrackOval" unique_id=1889599176 instance=ExtResource("1_ekwm8")]
+
+[node name="CheckpointPlacer" parent="." index="1" unique_id=636413940]
+target_checkpoint_spacing = null
+
+[node name="CheckpointGate" type="Node3D" parent="Checkpoints" parent_id_path=PackedInt32Array(333613908) index="0" unique_id=313476707 instance=ExtResource("2_ekwm8")]
+transform = Transform3D(0.004483938, -2.3256058e-05, 0.9999899, 0.0051862593, 0.9999865, 8.7919283e-10, -0.99997646, 0.005186207, 0.0044839988, 149.00424, 0, -1.3807373)
+script = ExtResource("3_6qdlf")
+is_finish_line = true
+is_key_checkpoint = true
+
+[node name="@Node3D@163620" type="Node3D" parent="Checkpoints" parent_id_path=PackedInt32Array(333613908) index="1" unique_id=732233545 instance=ExtResource("2_ekwm8")]
+transform = Transform3D(-0.00108844, -0.0136527, -0.9999062, -0.004530928, 0.9998966, -0.013647636, 0.99998915, 0.004515649, -0.0011501866, 311.6817, -0.12775803, 129.14842)
+script = ExtResource("3_6qdlf")
+checkpoint_index = 2
+is_key_checkpoint = null
+
+[node name="@Node3D@163621" type="Node3D" parent="Checkpoints" parent_id_path=PackedInt32Array(333613908) index="2" unique_id=1003962652 instance=ExtResource("2_ekwm8")]
+transform = Transform3D(0.020256782, -0.004765941, -0.99978346, -0.0015755611, 0.99998724, -0.004798835, 0.9997935, 0.0016724289, 0.020249017, 25.408207, -0.26953888, 127.85958)
+script = ExtResource("3_6qdlf")
+checkpoint_index = 1
+is_key_checkpoint = null
+
+[node name="StartPad" type="Node3D" parent="StartPads" parent_id_path=PackedInt32Array(1481573928) index="0" unique_id=1397069956 instance=ExtResource("4_l4j5q")]
+transform = Transform3D(0.004484175, -2.3695016e-05, 0.9999899, 0.005284084, 0.99998605, -6.879383e-11, -0.999976, 0.005284031, 0.004484237, 158.9815, -0.026420593, 3.6639862)
+script = ExtResource("5_m3f57")
+
+[node name="@Node3D@163195" type="Node3D" parent="StartPads" parent_id_path=PackedInt32Array(1481573928) index="1" unique_id=1654552871 instance=ExtResource("4_l4j5q")]
+transform = Transform3D(0.0044841724, -2.4133893e-05, 0.9999899, 0.0053819097, 0.9999855, 1.3294911e-10, -0.99997544, 0.0053818556, 0.004484237, 169.02599, 0.026908875, -6.2909317)
+script = ExtResource("5_m3f57")
+
+[node name="@Node3D@163196" type="Node3D" parent="StartPads" parent_id_path=PackedInt32Array(1481573928) index="2" unique_id=1259343223 instance=ExtResource("4_l4j5q")]
+transform = Transform3D(0.0044840504, -2.4571984e-05, 0.9999899, 0.005479735, 0.999985, 2.0537715e-10, -0.9999749, 0.0054796794, 0.004484118, 178.98077, -0.02740097, 3.7536583)
+script = ExtResource("5_m3f57")
+
+[node name="@Node3D@163197" type="Node3D" parent="StartPads" parent_id_path=PackedInt32Array(1481573928) index="3" unique_id=1544445795 instance=ExtResource("4_l4j5q")]
+transform = Transform3D(0.004483929, -2.501095e-05, 0.9999899, 0.0055775614, 0.99998444, 1.1717107e-09, -0.99997437, 0.005577505, 0.0044839988, 189.02591, 0.027885437, -6.201248)
+script = ExtResource("5_m3f57")
+
+[node name="@Node3D@163198" type="Node3D" parent="StartPads" parent_id_path=PackedInt32Array(1481573928) index="4" unique_id=2077922608 instance=ExtResource("4_l4j5q")]
+transform = Transform3D(-0.0064631193, -9.895914e-05, 0.99997914, 0.005674555, 0.9999839, 0.0001356357, -0.99996305, 0.005675313, -0.0064624534, 199.03448, -0.027042389, 3.7424774)
+script = ExtResource("5_m3f57")
+
+[node name="@Node3D@163199" type="Node3D" parent="StartPads" parent_id_path=PackedInt32Array(1481573928) index="5" unique_id=539720627 instance=ExtResource("4_l4j5q")]
+transform = Transform3D(-0.006174066, -8.09472e-05, 0.9999809, 0.005772418, 0.9999833, 0.00011658736, -0.99996424, 0.005773028, -0.006173496, 208.9711, 0.031454086, -6.3203125)
+script = ExtResource("5_m3f57")
+
+[node name="@Node3D@163200" type="Node3D" parent="StartPads" parent_id_path=PackedInt32Array(1481573928) index="6" unique_id=892099797 instance=ExtResource("4_l4j5q")]
+transform = Transform3D(-0.005903493, -6.4084015e-05, 0.9999826, 0.0058702743, 0.9999828, 9.873975e-05, -0.99996537, 0.0058707553, -0.005903015, 219.03067, -0.025684357, 3.6189613)
+script = ExtResource("5_m3f57")
+
+[node name="@Node3D@163201" type="Node3D" parent="StartPads" parent_id_path=PackedInt32Array(1481573928) index="7" unique_id=1106370536 instance=ExtResource("4_l4j5q")]
+transform = Transform3D(-0.0056276694, -4.6980113e-05, 0.99998415, 0.0059681227, 0.9999822, 8.056717e-05, -0.9999663, 0.005968482, -0.0056272885, 228.97263, 0.034404755, -6.438347)
+script = ExtResource("5_m3f57")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." index="4" unique_id=2096665943]
 transform = Transform3D(-0.20975512, 0.97775394, 0, -0.283533, -0.060825635, 0.9570315, 0.9357413, 0.20074226, 0.28998402, 0, 0, 0)
@@ -22,8 +79,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 51.751854, -16.273998, 62.963
 curve = SubResource("Curve3D_iqwtb")
 
 [node name="CheckpointPathFollower" parent="TrackMesh/TrackPath" index="0" unique_id=1609718457]
-transform = Transform3D(-0.4231045, 0.278713, 0.8619651, 0.5541018, 0.8322541, 0.0028785192, -0.716689, 0.47890896, -0.50664437, -153.00551, 16.197744, -54.606243)
-progress = 1089.9242
+transform = Transform3D(-0.01388529, -4.2915035e-05, -0.9997391, -0.0030901812, 0.99983287, 1.2067543e-10, 0.9997373, 0.0030898803, -0.0138853155, 115.51911, 16.273998, 65.29288)
+progress = 230.03557
 
 [node name="Track" parent="TrackMesh" index="1" unique_id=117510272 node_paths=PackedStringArray("path_3d")]
 path_3d = NodePath("../TrackPath")

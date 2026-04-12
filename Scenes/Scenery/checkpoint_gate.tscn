@@ -21,6 +21,7 @@ size = Vector3(24.46859, 10.360382, 1)
 
 [node name="CheckpointGate" type="Node3D" unique_id=313476707]
 script = ExtResource("1_lsxwm")
+key_checkpoint = null
 
 [node name="Top" type="MeshInstance3D" parent="." unique_id=1988150604]
 unique_name_in_owner = true
@@ -30,6 +31,7 @@ mesh = SubResource("BoxMesh_02yx8")
 [node name="TopCheckered" type="MeshInstance3D" parent="." unique_id=1907551773]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
+visible = false
 mesh = SubResource("BoxMesh_q3sh1")
 
 [node name="Left" type="MeshInstance3D" parent="." unique_id=896736879]

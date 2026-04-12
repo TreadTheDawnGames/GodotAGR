@@ -34,10 +34,8 @@ func _before_lifespan_expired():
 	pass
 
 func _on_hitbox_area_entered(_area : Area3D):
-	print("Thinings")
 	queue_free()
 
 func _on_hitbox_body_entered(_body : Node3D):
-	print("Thinings")
 	queue_free()
 	pass

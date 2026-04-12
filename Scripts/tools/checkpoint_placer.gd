@@ -4,10 +4,19 @@ class_name CheckpointPlacer
 @onready var checkpoints: Node3D = %Checkpoints
 @onready var start_pads: Node3D = %StartPads
 
-@export_tool_button("Populate Track Vars") var pop_track : Callable = func(): (get_parent() as Track).populate_arrays()
+@export_tool_button("Reset Checkpoints") var reset_track : Callable = func(): 
+	for child in checkpoints.get_children():
+		child.queue_free()
+	for child in start_pads.get_children():
+		child.queue_free()
+	
+@export_tool_button("Populate Track") var pop_track : Callable = func(): 
+	(get_parent() as Track).populate_arrays()
+	
 @export var do_placing : bool = false 
 @export var start_pad_distance_from_center : float = 5
 @export var start_pad_distance_from_others : float = 10
+@export var target_checkpoint_spacing : float = 10.0
 
 
 const CHECKPOINT_GATE = preload("uid://cwc2c3lsm2dkt")
@@ -52,21 +61,24 @@ func _process(_delta):
 			add_checkpoint(track_mesh.checkpoint_path_follower)
 			set_checkpoint_indexes.call_deferred(track_mesh)
 			
-		print("thinging")
 	elif not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		is_mouse_down = false
 
-func add_checkpoint(checkpoint_path_follower : PathFollow3D):
+func add_checkpoint(checkpoint_path_follower : PathFollow3D, is_key : bool = false):
 	var new_checkpoint : CheckpointGate = CHECKPOINT_GATE.instantiate()
+	var checkpoint_pos : Vector3 = checkpoint_path_follower.global_position
+	var checkpoint_rot : Vector3 = checkpoint_path_follower.global_rotation
 	if checkpoints.get_children().size() == 0:
 		new_checkpoint.is_finish_line = true
+		is_key = true
 		add_spawnpoints(checkpoint_path_follower)
 	else:
 		new_checkpoint.is_finish_line = false
 	checkpoints.add_child(new_checkpoint)
-	new_checkpoint.global_position = checkpoint_path_follower.global_position
-	new_checkpoint.rotation = checkpoint_path_follower.rotation
+	new_checkpoint.global_position = checkpoint_pos
+	new_checkpoint.rotation = checkpoint_rot
 	new_checkpoint.owner = get_tree().edited_scene_root
+	new_checkpoint.is_key_checkpoint = is_key
 	pass
 
 func set_checkpoint_indexes(track_mesh : TrackMesh):
@@ -79,7 +91,7 @@ func set_checkpoint_indexes(track_mesh : TrackMesh):
 		track_mesh.set_to_nearest_point(checkpoint.global_position)
 		checkpoint.checkpoint_position_on_track = track_mesh.checkpoint_path_follower.progress
 	sorted_checkpoints.sort_custom(func(a : CheckpointGate, b : CheckpointGate): 
-		return a.checkpoint_position_on_track > b.checkpoint_position_on_track)
+		return a.checkpoint_position_on_track < b.checkpoint_position_on_track)
 	var before_finish_line : Array[CheckpointGate] =  sorted_checkpoints.slice(0, sorted_checkpoints.find(first_checkpoint))
 	var after_finish_line : Array[CheckpointGate] =  sorted_checkpoints.slice(sorted_checkpoints.find(first_checkpoint))
 	after_finish_line.append_array(before_finish_line)
@@ -101,5 +113,3 @@ func add_spawnpoints(checkpoint_path_follower : PathFollow3D):
 		new_start_pad.rotation = checkpoint_path_follower.rotation
 		new_start_pad.owner = get_tree().edited_scene_root
 	checkpoint_path_follower.h_offset = 0
-	
-	pass
