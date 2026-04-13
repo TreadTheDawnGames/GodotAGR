@@ -18,7 +18,7 @@ func setup(up : Vector3, shooter : CarBuiltInPhysics) -> void:
 	speed = initial_speed
 	hitbox.area_entered.connect(_on_hitbox_area_entered)
 	hitbox.body_entered.connect(_on_hitbox_body_entered)
-	
+	hitbox.my_owner = shooter
 	await get_tree().create_timer(lifespan).timeout
 	await _before_lifespan_expired()
 	queue_free()

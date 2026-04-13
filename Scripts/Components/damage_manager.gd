@@ -80,4 +80,7 @@ func _projectile_detected(area : Area3D):
 		push_warning("Detected area is not a projectile.")
 		return
 	var projectile : ProjectileHitbox = area as ProjectileHitbox
+	if projectile.my_owner == owner:
+		#Skip if I shot this projectile
+		return
 	take_damage(projectile.damage)
