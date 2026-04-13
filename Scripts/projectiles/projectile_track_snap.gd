@@ -3,14 +3,17 @@ class_name CarWeaponProjectile_TrackFollow
 
 @onready var track_snapper: TrackSnapper = $TrackSnapper
 
-func _ready() -> void:
-	
-	transform.basis = Basis.looking_at(-direction, Vector3.UP)
+#func _ready() -> void:
+func setup(up : Vector3):
+	track_snapper.speed = initial_speed
+	transform.basis = Basis.looking_at(-direction, up)
 	track_snapper.assign_raycasts([%RayCast3D])
-	super._ready()
+	velocity = direction.normalized() * initial_speed
+	super.setup(up)
 
 func _physics_process(delta: float) -> void:
 	
-	track_snapper.perform_snap(self, 1, 0, 0, 0, 0, 0, 0, delta)
-	
+	if track_snapper.perform_snap(self, 1, 0, 0, 0, 0, 0, 0, delta):
+		queue_free()
+
 	pass

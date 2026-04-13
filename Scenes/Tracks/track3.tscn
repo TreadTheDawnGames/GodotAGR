@@ -4,9 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://chics8gd3g1u0" path="res://Scenes/Tracks/Meshes/track_3_mesh.tscn" id="2_5ujwb"]
 
 [node name="TrackBase" unique_id=1889599176 instance=ExtResource("1_75lro")]
-
-[node name="PhysicsCarWithWeapons" parent="." index="0" unique_id=1233134335]
-speed = 2.0
+script = null
 
 [node name="Track3" parent="." index="1" unique_id=716470887 instance=ExtResource("2_5ujwb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 34.81054, -44.080696)

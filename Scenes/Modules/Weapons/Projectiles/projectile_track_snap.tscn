@@ -3,23 +3,17 @@
 [ext_resource type="Script" uid="uid://cojldv4l2fqtt" path="res://Scripts/projectiles/projectile_track_snap.gd" id="1_p8rhl"]
 [ext_resource type="Script" uid="uid://tsm81n5fkwr7" path="res://Scripts/Components/track_snapper.gd" id="2_43fsg"]
 [ext_resource type="Script" uid="uid://1461p1xmpfu6" path="res://Scripts/hitbox3d.gd" id="2_77652"]
+[ext_resource type="Material" uid="uid://nry6ihkoqwra" path="res://Assets/Materials/LaserMaterial.tres" id="3_43fsg"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xifme"]
-albedo_color = Color(1, 1, 0, 1)
-emission_enabled = true
-emission = Color(1, 0, 0, 1)
-emission_energy_multiplier = 16.0
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_bmtwq"]
+material = ExtResource("3_43fsg")
+radius = 0.07
 
-[sub_resource type="SphereMesh" id="SphereMesh_xifme"]
-material = SubResource("StandardMaterial3D_xifme")
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vn3wf"]
 radius = 0.1
-height = 0.2
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_vupct"]
-radius = 0.15
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_4af56"]
-radius = 0.1
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0c6w6"]
+radius = 0.07
 
 [node name="Projectile" type="CharacterBody3D" unique_id=1994070456 node_paths=PackedStringArray("hitbox")]
 collision_layer = 0
@@ -30,11 +24,14 @@ lifespan = 5.0
 
 [node name="TrackSnapper" type="Node" parent="." unique_id=449726649]
 script = ExtResource("2_43fsg")
+use_acceleration = false
+gravity = 0.0
 ground_dist = 1.5
 metadata/_custom_type_script = "uid://tsm81n5fkwr7"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=885905165]
-mesh = SubResource("SphereMesh_xifme")
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_bmtwq")
 
 [node name="Area3D" type="Area3D" parent="." unique_id=1015322486]
 collision_layer = 0
@@ -42,11 +39,19 @@ collision_mask = 8
 script = ExtResource("2_77652")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1976737345]
-shape = SubResource("SphereShape3D_vupct")
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_vn3wf")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=764514066]
-shape = SubResource("SphereShape3D_4af56")
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_0c6w6")
 
 [node name="RayCast3D" type="RayCast3D" parent="." unique_id=1807823623]
 unique_name_in_owner = true
-target_position = Vector3(0, -10, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+target_position = Vector3(0, -5, 0)
+
+[node name="RayCast3D3" type="RayCast3D" parent="." unique_id=1877005176]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+target_position = Vector3(0, -5, 0)

@@ -19,10 +19,6 @@ c_input_manger = NodePath("InputManger_Player")
 script = ExtResource("3_cd100")
 metadata/_custom_type_script = "uid://b0dna7lmhpgof"
 
-[node name="TrackSnapper" parent="." index="1" unique_id=1984121014]
-use_acceleration = true
-speed = 2.0
-
 [node name="InputManger_Player" parent="." index="2" unique_id=833981559]
 script = ExtResource("3_se88i")
 

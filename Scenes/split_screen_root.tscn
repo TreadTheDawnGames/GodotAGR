@@ -1,12 +1,29 @@
 [gd_scene format=3 uid="uid://dqc2330so8nau"]
 
-[ext_resource type="PackedScene" uid="uid://fw7eu7xwc1qq" path="res://Scenes/gym.tscn" id="1_7y0c5"]
 [ext_resource type="Script" uid="uid://dfd6pqrkjtakb" path="res://Scripts/debug_tools.gd" id="1_o5me4"]
 [ext_resource type="PackedScene" uid="uid://bbb7v7tdg4mrf" path="res://Scenes/UI/lobby.tscn" id="3_a7bpj"]
+[ext_resource type="PackedScene" uid="uid://bjmu0pqfhbiyy" path="res://Scenes/Tracks/track3.tscn" id="4_h0u5u"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_a7bpj"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_h0u5u"]
+sky_material = SubResource("ProceduralSkyMaterial_a7bpj")
+
+[sub_resource type="Environment" id="Environment_luvjy"]
+background_mode = 2
+sky = SubResource("Sky_h0u5u")
+glow_enabled = true
+glow_intensity = 8.0
+glow_hdr_threshold = 2.0
 
 [node name="SplitScreenRoot" type="Node3D" unique_id=1628531053 node_paths=PackedStringArray("curr_level")]
 script = ExtResource("1_o5me4")
 curr_level = NodePath("Screens/SubViewportContainer/SubViewport")
+
+[node name="WorldEnvironment2" type="WorldEnvironment" parent="." unique_id=882958586]
+environment = SubResource("Environment_luvjy")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=53416123]
 
@@ -32,5 +49,4 @@ handle_input_locally = false
 size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
-[node name="Gym" parent="Screens/SubViewportContainer/SubViewport" unique_id=1771197406 instance=ExtResource("1_7y0c5")]
-script = null
+[node name="TrackBase" parent="Screens/SubViewportContainer/SubViewport" unique_id=1889599176 instance=ExtResource("4_h0u5u")]

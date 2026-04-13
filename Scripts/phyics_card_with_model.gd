@@ -4,6 +4,7 @@ class_name CarBuiltInPhysics
 
 @export var c_input_manger: InputManager
 @onready var c_track_snapper: TrackSnapper = %TrackSnapper
+@onready var c_visual_part_of_car: CarVisuals = $VisualPartOfCar
 
 
 var player_index : int = 0
@@ -15,6 +16,9 @@ func ensure_components():
 		c_input_manger = get_node("%InputManager_Player")
 	if not c_track_snapper:
 		c_track_snapper = get_node("%TrackSnapper")
+	if not c_visual_part_of_car:
+		c_visual_part_of_car = get_node("%VisualPartOfCar")
+		
 
 func ready_for_spawn(_player_index : int):
 	player_index = _player_index
@@ -25,6 +29,7 @@ func ready_for_spawn(_player_index : int):
 		rays.append(ray)
 	c_track_snapper.assign_raycasts(rays)
 	c_input_manger.set_input_device(PlayerManager.get_player_device(player_index))
+	c_visual_part_of_car.setup(self)
 
 
 

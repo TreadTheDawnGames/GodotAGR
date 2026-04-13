@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://fw7eu7xwc1qq"]
 
-[ext_resource type="Script" uid="uid://dfd6pqrkjtakb" path="res://Scripts/debug_tools.gd" id="1_3dogw"]
 [ext_resource type="Script" uid="uid://cjc2ikrefvvdq" path="res://addons/zylann.hterrain/hterrain.gd" id="2_50ct6"]
 [ext_resource type="Resource" uid="uid://j5romqovq38o" path="res://Assets/Terrain/data.hterrain" id="3_ak5v8"]
 [ext_resource type="Script" uid="uid://cln80f4dwv35i" path="res://addons/zylann.hterrain/hterrain_texture_set.gd" id="3_hb2xm"]
@@ -47,9 +46,7 @@ _data = {
 &"elevator": SubResource("Animation_x033f")
 }
 
-[node name="Gym" type="Node3D" unique_id=1771197406 node_paths=PackedStringArray("spawn_position")]
-script = ExtResource("1_3dogw")
-spawn_position = NodePath("HTerrain/SpawnPosition")
+[node name="Gym" type="Node3D" unique_id=1771197406]
 
 [node name="HTerrain" type="Node3D" parent="." unique_id=1408702683]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -250, -30, -200)
