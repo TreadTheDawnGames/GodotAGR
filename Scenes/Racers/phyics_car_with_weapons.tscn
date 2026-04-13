@@ -43,10 +43,11 @@ script = ExtResource("4_jn7t0")
 hurtbox = NodePath("../Area3D")
 
 [node name="TrackSnapper" parent="." index="4" unique_id=1984121014]
+use_acceleration = true
 speed = 2.0
+strafe_speed = 1.0
 
 [node name="InputManger_Player" parent="." index="5" unique_id=833981559]
-
 script = ExtResource("3_se88i")
 
 [node name="ShipHud" type="Control" parent="." index="12" unique_id=1033596883]

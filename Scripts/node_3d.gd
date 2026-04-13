@@ -91,4 +91,4 @@ func _spawn_projectile(marker : Marker3D, direction : Vector3):
 	spawned_projectile.global_rotation = global_rotation
 
 	var up_vector: Vector3 = - global_transform.basis.y
-	spawned_projectile.setup(up_vector)
+	spawned_projectile.setup(up_vector, owner as CarBuiltInPhysics) # Casting owner as CarBuiltInPhysics assumes that weapons managers will always be on said type. I don't particularly like this, but I also don't think it will matter too much.

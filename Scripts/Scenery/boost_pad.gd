@@ -16,6 +16,5 @@ func _process(delta: float) -> void:
 func _on_body_entered(detected : Node3D):
 	if detected is not CarBuiltInPhysics:
 		return
-	
 	var car : CarBuiltInPhysics = detected as CarBuiltInPhysics
 	car.c_track_snapper.boost(boost_power, boost_time)

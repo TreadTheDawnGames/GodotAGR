@@ -117,11 +117,10 @@ func perform_snap(character_body : CharacterBody3D, acceleration : float,
 	# Get movement forces
 
 	#if use_acceleration:
-#	vel += global_transform.basis.z * speed * (acceleration + curr_boost_power)
 #	vel += global_transform.basis.x * strafe_speed * strafe 
 	
 	if use_acceleration:
-		vel += global_transform.basis.z * speed * acceleration
+		vel += global_transform.basis.z * speed * (acceleration + curr_boost_power)
 		vel += global_transform.basis.x * strafe_speed * strafe 
 	else:
 		#GPT
@@ -164,7 +163,7 @@ func perform_snap(character_body : CharacterBody3D, acceleration : float,
 	character_body.global_transform = global_transform
 	character_body.global_position = global_position
 	character_body.velocity = vel
-	character_body.move_and_slide()
+	return character_body.move_and_slide()
 	
 func boost(boost_amount : float, boost_time : float = 1.0):
 	curr_boost_power += boost_amount

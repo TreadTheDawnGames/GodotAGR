@@ -11,9 +11,10 @@ class_name CarWeaponProjectile
 
 var speed : float = 0
 var direction : Vector3 = Vector3.RIGHT
+var my_owner : CarBuiltInPhysics
 
-# Called when the node enters the scene tree for the first time.
-func setup(up : Vector3) -> void:
+func setup(up : Vector3, shooter : CarBuiltInPhysics) -> void:
+	my_owner = shooter
 	speed = initial_speed
 	hitbox.area_entered.connect(_on_hitbox_area_entered)
 	hitbox.body_entered.connect(_on_hitbox_body_entered)
@@ -34,8 +35,12 @@ func _before_lifespan_expired():
 	pass
 
 func _on_hitbox_area_entered(_area : Area3D):
-	queue_free()
+	if _area != my_owner:
+		print("thinging")
+		queue_free()
 
 func _on_hitbox_body_entered(_body : Node3D):
-	queue_free()
+	if _body != my_owner:
+		print("thinging 2")
+		queue_free()
 	pass
