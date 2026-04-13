@@ -16,6 +16,7 @@ unique_name_in_owner = true
 layout_mode = 0
 offset_right = 8.0
 offset_bottom = 8.0
+focus_mode = 0
 text = "Player 2 Join"
 
 [node name="CurrentPlayers" type="VBoxContainer" parent="." unique_id=1170381710]
@@ -33,6 +34,7 @@ offset_left = 1019.0
 offset_top = 3.0
 offset_right = 1143.0
 offset_bottom = 34.0
+focus_mode = 0
 text = "Debug action :)"
 
 [connection signal="pressed" from="Debug_button" to="." method="_on_debug_button_pressed"]

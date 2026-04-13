@@ -5,6 +5,8 @@ class_name CarBuiltInPhysics
 @export var c_input_manger: InputManager
 @onready var c_track_snapper: TrackSnapper = %TrackSnapper
 @onready var c_track_event_signaller: TrackEventSignaler = %TrackEvenetSignaller
+@onready var c_visual_part_of_car: CarVisuals = $VisualPartOfCar
+
 
 var player_index : int = 0
 
@@ -17,6 +19,9 @@ func ensure_components():
 		c_track_snapper = get_node("%TrackSnapper")
 	if not c_track_event_signaller:
 		c_track_event_signaller=get_node("%TrackEvenetSignaller")
+	if not c_visual_part_of_car:
+		c_visual_part_of_car = get_node("%VisualPartOfCar")
+		
 
 func ready_for_spawn(_player_index : int):
 	player_index = _player_index
@@ -31,6 +36,10 @@ func ready_for_spawn(_player_index : int):
 	c_track_event_signaller.sig_lap_completed.connect(_on_sig_lap_completed)
 	c_track_event_signaller.sig_checkpoint_reached.connect(_on_sig_checkpoint_reached)
 	c_track_event_signaller.sig_left_track.connect(_on_sig_left_track)
+	c_visual_part_of_car.setup(self)
+
+
+
 
 func _physics_process(delta: float) -> void:
 	# Cache the actual device index and check to make sure 

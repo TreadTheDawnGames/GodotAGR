@@ -26,13 +26,7 @@ var was_y_vel : float = 0
 @export var friction : float = 0.125/10
 @export var air_friction : float = 0.125/15
 
-@export var ground_dist : float = 1 
-#:
-	#set(new_val):
-		#ground_dist = new_val
-		#for raycast : RayCast3D in raycasts:
-			#raycast.target_position.y = -ground_dist
-#
+@export var ground_dist : float = 1 #d:
 
 @export var adjustable_ground_distance : bool = false
 @export var max_elevation : float = 3
@@ -55,32 +49,32 @@ func align_with_y(xfrom : Transform3D, newy : Vector3) ->  Transform3D:
 
 ## Modifies global_transform and global_position and returns them as a tuple [Transform3D, Vector3]
 func snap_to_track(global_transform : Transform3D, global_position : Vector3) -> Array:
-	var n : Vector3 = Vector3(0,0,0)
+	var normal : Vector3 = Vector3(0,0,0)
 	var count = 0
-	var np : Vector3
+	var normal_point : Vector3
 	var dif : float = 0
 	var look : Vector3 = Vector3(0,0,0)
 	for ray in raycasts:
 		ray.force_raycast_update()
 		if (ray.is_colliding()):
-			n += ray.get_collision_normal()
+			normal += ray.get_collision_normal()
 			count += 1
 
 	if (is_raycast_colliding()):
-		n /= count
-		n = n.normalized()
-		var xform = align_with_y(global_transform, n)
+		normal /= count
+		normal = normal.normalized()
+		var xform = align_with_y(global_transform, normal)
 		global_transform = xform
 		
 		for ray in raycasts:
 			ray.force_raycast_update()
 			if (ray.is_colliding()):
-				np = ray.get_collision_point()
+				normal_point = ray.get_collision_point()
 				dif = ray.global_position.distance_to(global_position)
 				look = ray.global_position.direction_to(global_position)
 				break
-		if np != null:
-			global_position = np + look * dif + n * ground_dist
+		if normal_point != null:
+			global_position = normal_point + look * dif + normal * ground_dist
 	return [global_transform, global_position]
 
 func is_raycast_colliding() -> bool:
@@ -89,11 +83,14 @@ func is_raycast_colliding() -> bool:
 			return true
 	return false
 
-## (Theoretically) snaps a CharacterBody3D to a collisionshape. 
+## (Theoretically) snaps a CharacterBody3D to a collisionshape and returns whether it hit something.
 ## [br]character_body : The body to snap
 ## [br]input_manager : The how to control the body
 ## [br]delta : delta time
-func perform_snap(character_body : CharacterBody3D, acceleration : float, strafe : float, brake : float, rotation_change : float, pitch : float, roll : float, elevation : float, delta : float) -> void:
+func perform_snap(character_body : CharacterBody3D, acceleration : float, 
+				strafe : float, brake : float, rotation_change : float, 
+				pitch : float, roll : float, elevation : float, delta : float) -> bool:
+					
 	if raycasts.size() == 0:
 		push_error("There are no rays in the raycasts array for " + name+". Owner: " + owner.name + ". It is impossible for this node to snap. Disabling process.")
 		set_physics_process(false)
@@ -118,10 +115,21 @@ func perform_snap(character_body : CharacterBody3D, acceleration : float, strafe
 	global_position = snapped_vars[1]
 	
 	# Get movement forces
+
 	#if use_acceleration:
-	vel += global_transform.basis.z * speed * (acceleration + curr_boost_power)
-	vel += global_transform.basis.x * strafe_speed * strafe 
+#	vel += global_transform.basis.z * speed * (acceleration + curr_boost_power)
+#	vel += global_transform.basis.x * strafe_speed * strafe 
 	
+	if use_acceleration:
+		vel += global_transform.basis.z * speed * acceleration
+		vel += global_transform.basis.x * strafe_speed * strafe 
+	else:
+		#GPT
+		var forward_vel = global_transform.basis.z * speed * acceleration
+		var strafe_vel = global_transform.basis.x * strafe_speed * strafe
+		# preserve vertical velocity (gravity, snapping, etc)
+		var vertical_vel = global_transform.basis.y * global_transform.basis.y.dot(vel)
+		vel = forward_vel + strafe_vel + vertical_vel
 
 	# Brakes (Only on ground)
 	if is_raycast_colliding():

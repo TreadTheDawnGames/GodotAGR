@@ -9,6 +9,9 @@ script = ExtResource("1_o5me4")
 first_player_viewport = NodePath("Screens/SubViewportContainer/FirstPlayerViewport")
 loaded_track = NodePath("Screens/SubViewportContainer/FirstPlayerViewport/TrackSplitTest")
 
+[node name="WorldEnvironment2" type="WorldEnvironment" parent="." unique_id=882958586]
+environment = SubResource("Environment_luvjy")
+
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=53416123]
 
 [node name="Lobby" parent="CanvasLayer" unique_id=408709469 instance=ExtResource("3_a7bpj")]

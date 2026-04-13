@@ -46,6 +46,7 @@ hurtbox = NodePath("../Area3D")
 speed = 2.0
 
 [node name="InputManger_Player" parent="." index="5" unique_id=833981559]
+
 script = ExtResource("3_se88i")
 
 [node name="ShipHud" type="Control" parent="." index="12" unique_id=1033596883]

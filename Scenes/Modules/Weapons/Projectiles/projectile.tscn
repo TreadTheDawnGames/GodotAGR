@@ -1,16 +1,11 @@
 [gd_scene format=3 uid="uid://dcy7o5wfvwgdw"]
 
 [ext_resource type="Script" uid="uid://cg7oiwcfnh8ic" path="res://Scripts/projectiles/projectile.gd" id="1_rnpl4"]
+[ext_resource type="Material" uid="uid://nry6ihkoqwra" path="res://Assets/Materials/LaserMaterial.tres" id="2_fd801"]
 [ext_resource type="Script" uid="uid://1461p1xmpfu6" path="res://Scripts/hitbox3d.gd" id="2_xifme"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xifme"]
-albedo_color = Color(1, 1, 0, 1)
-emission_enabled = true
-emission = Color(1, 0, 0, 1)
-emission_energy_multiplier = 16.0
-
 [sub_resource type="SphereMesh" id="SphereMesh_xifme"]
-material = SubResource("StandardMaterial3D_xifme")
+material = ExtResource("2_fd801")
 radius = 0.1
 height = 0.2
 

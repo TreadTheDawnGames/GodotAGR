@@ -13,7 +13,7 @@ var speed : float = 0
 var direction : Vector3 = Vector3.RIGHT
 
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
+func setup(up : Vector3) -> void:
 	speed = initial_speed
 	hitbox.area_entered.connect(_on_hitbox_area_entered)
 	hitbox.body_entered.connect(_on_hitbox_body_entered)
