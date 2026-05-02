@@ -108,3 +108,6 @@ surface_0/tilt = true
 surface_0/offset = Vector2(-12.5, 1.5)
 surface_0/triangle_count = 0
 material_override = SubResource("StandardMaterial3D_pjlew")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=806565743]
+transform = Transform3D(1, 0, 0, 0, 0.52493703, 0.8511411, 0, -0.8511411, 0.52493703, 0, 0, 0)
